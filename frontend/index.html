@@ -1,0 +1,303 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>DSA Virtual Lab — Step Into the Logic of DSA.</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<a class="skip-link" href="#main">Skip to content</a>
+
+<!-- NAVBAR -->
+<header class="navbar" id="navbar">
+  <div class="navbar-inner">
+    <a href="index.html" class="brand">
+      <span class="brand-mark" aria-hidden="true">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none"><path d="M12 3L22 20H2L12 3Z" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/></svg>
+      </span>
+      <span>DSA Virtual Lab</span>
+    </a>
+
+    <nav class="nav-links" id="navLinks">
+      <a href="#understand">Explore DSA</a>
+      <a href="#virtual-lab">Virtual Lab</a>
+      <a href="#how-it-helps">Practice</a>
+    </nav>
+
+    <div class="navbar-actions" data-authed="false">
+      <a href="#" class="btn btn-outline btn-compact">Log in</a>
+      <a href="#" class="btn btn-primary btn-compact">Get Started</a>
+    </div>
+
+    <button class="nav-toggle" id="navToggle" aria-label="Toggle menu" aria-expanded="false">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</header>
+
+<main id="main">
+
+  <!-- HERO -->
+  <section class="hero">
+
+    <div class="hero-inner">
+      <div class="hero-copy">
+        <span class="pill">Interactive learning for DSA</span>
+        <h1>Step Into the <br><span class="ink-lime">Logic of DSA.</span></h1>
+        <p class="hero-sub">Explore DSA concepts, experiment with algorithms, practice what you learn, and build your understanding through an interactive learning experience.</p>
+
+        <div class="hero-ctas">
+          <a href="#understand" class="btn btn-primary btn-lg">Explore DSA →</a>
+          <a href="#virtual-lab" class="btn btn-outline btn-lg">Enter Virtual Lab</a>
+        </div>
+
+        <div class="hero-feature-row">
+          <span><i class="fi">▤</i>Learn Concepts</span>
+          <span><i class="fi">▶</i>Visualize Execution</span>
+          <span><i class="fi">◇</i>Practice Problems</span>
+          <span><i class="fi">▂▅█</i>Track Progress</span>
+        </div>
+      </div>
+
+      <div class="hero-visual">
+        <div class="panel lab-window">
+          <div class="lab-window-head">
+            <div class="lab-select">
+              <span class="lab-select-value">Binary Search</span>
+              <span class="chev">▾</span>
+            </div>
+            <div class="step-nav">
+              <button class="step-arrow" aria-label="Previous">‹</button>
+              <span class="lab-step-pill">Step 3 / 6</span>
+              <button class="step-arrow" aria-label="Next">›</button>
+            </div>
+          </div>
+
+          <div class="lab-body">
+            <div class="lab-array-col">
+              <div class="array-row">
+                <div class="cell"><span>4</span></div>
+                <div class="cell"><span>8</span></div>
+                <div class="cell active"><span>12</span></div>
+                <div class="cell"><span>16</span></div>
+                <div class="cell"><span>23</span></div>
+                <div class="cell"><span>42</span></div>
+              </div>
+              <div class="pointer-row">
+                <div class="pointer"><span class="arrow-up">↑</span>low</div>
+                <div class="pointer pointer-active"><span class="arrow-up">↑</span>mid</div>
+                <div class="pointer"><span class="arrow-up">↑</span>high</div>
+              </div>
+            </div>
+
+            <div class="var-panel">
+              <span class="var-panel-title">Variables</span>
+              <div class="var-line"><span>low</span><strong>0</strong></div>
+              <div class="var-line"><span>mid</span><strong>2</strong></div>
+              <div class="var-line"><span>high</span><strong>5</strong></div>
+              <div class="var-line"><span>target</span><strong>23</strong></div>
+            </div>
+          </div>
+
+          <div class="lab-msg-box">
+            <p>Comparing 12 with target 23.<br>Since 12 &lt; 23, search in right half.</p>
+          </div>
+
+          <div class="lab-controls">
+            <button class="ctrl-btn ctrl-btn-text" aria-label="Previous">‹ Previous</button>
+            <button class="ctrl-btn ctrl-btn-primary" aria-label="Pause">▶ Pause</button>
+            <button class="ctrl-btn ctrl-btn-text" aria-label="Next">Next ›</button>
+            <button class="ctrl-btn" aria-label="Reset">↺ Reset</button>
+            <div class="speed-mini"><span>Speed</span><input type="range" min="1" max="3" value="2" aria-label="Playback speed"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+    <!-- SECTION 1: THE BIG IDEA -->
+  <section class="section" id="understand">
+    <div class="section-inner">
+      <span class="pill">The Big Idea</span>
+      <h2>Understand DSA Beyond the Code.</h2>
+      <p class="section-sub">Most platforms teach syntax. We show you how algorithms actually think — one decision at a time.</p>
+
+      <div class="flow-row">
+        <div class="flow-node"><span>Input</span></div>
+        <div class="flow-arrow" aria-hidden="true">→</div>
+        <div class="flow-node"><span>Algorithm</span></div>
+        <div class="flow-arrow" aria-hidden="true">→</div>
+        <div class="flow-node flow-node-active"><span>Execution States</span></div>
+        <div class="flow-arrow" aria-hidden="true">→</div>
+        <div class="flow-node"><span>Visualization</span></div>
+        <div class="flow-arrow" aria-hidden="true">→</div>
+        <div class="flow-node"><span>Result</span></div>
+      </div>
+
+      <div class="state-chip-row">
+        <span class="state-chip">Variables</span>
+        <span class="state-chip">Comparisons</span>
+        <span class="state-chip">Decisions</span>
+        <span class="state-chip">State Changes</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- SECTION 2: HOW IT HELPS -->
+  <section class="section section-muted" id="how-it-helps">
+    <div class="section-inner">
+      <span class="pill">How It Helps</span>
+      <h2>From Confusion to Clarity.</h2>
+      <p class="section-sub">Four simple steps from first look to full mastery.</p>
+
+      <div class="journey-row">
+        <div class="journey-card">
+          <div class="journey-icon">▤</div>
+          <h3>Explore</h3>
+          <p>Understand the concept with clear explanations.</p>
+        </div>
+        <span class="journey-arrow" aria-hidden="true">→</span>
+        <div class="journey-card journey-card-active">
+          <div class="journey-icon">▶</div>
+          <h3>Visualize</h3>
+          <p>See the algorithm execute step by step.</p>
+        </div>
+        <span class="journey-arrow" aria-hidden="true">→</span>
+        <div class="journey-card">
+          <div class="journey-icon">◇</div>
+          <h3>Practice</h3>
+          <p>Solve handpicked problems for each topic.</p>
+        </div>
+        <span class="journey-arrow" aria-hidden="true">→</span>
+        <div class="journey-card">
+          <div class="journey-icon" style="font-size: 0.6rem;">▂▅█</div>
+          <h3>Progress</h3>
+          <p>Track your learning and see what you've mastered.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SECTION 3: OUR TECHNOLOGY -->
+  <section class="section" id="virtual-lab">
+    <div class="section-inner tech-layout">
+      <div class="tech-copy">
+        <span class="pill">Our Technology</span>
+        <h2>See What's Happening at Every Step.</h2>
+        <p class="section-sub">Every comparison, every decision, fully visible.</p>
+
+        <ul class="benefit-list">
+          <li><span class="benefit-dot"></span>See every important step.</li>
+          <li><span class="benefit-dot"></span>Track variables.</li>
+          <li><span class="benefit-dot"></span>Understand comparisons.</li>
+          <li><span class="benefit-dot"></span>Follow decisions.</li>
+          <li><span class="benefit-dot"></span>Control the execution.</li>
+        </ul>
+      </div>
+
+      <div class="panel filmstrip-card">
+        <div class="filmstrip-row">
+          <div class="film-frame">
+            <div class="film-bars"><span class="film-bar film-bar-hl" style="height:22px"></span><span class="film-bar" style="height:30px"></span><span class="film-bar" style="height:14px"></span><span class="film-bar" style="height:24px"></span></div>
+            <span class="film-label">Step 1</span>
+          </div>
+          <span class="film-arrow" aria-hidden="true">→</span>
+          <div class="film-frame">
+            <div class="film-bars"><span class="film-bar" style="height:22px"></span><span class="film-bar film-bar-hl" style="height:30px"></span><span class="film-bar" style="height:14px"></span><span class="film-bar" style="height:24px"></span></div>
+            <span class="film-label">Step 2</span>
+          </div>
+          <span class="film-arrow" aria-hidden="true">→</span>
+          <div class="film-frame">
+            <div class="film-bars"><span class="film-bar" style="height:22px"></span><span class="film-bar" style="height:30px"></span><span class="film-bar film-bar-hl" style="height:14px"></span><span class="film-bar" style="height:24px"></span></div>
+            <span class="film-label">Step 3</span>
+          </div>
+          <span class="film-arrow" aria-hidden="true">→</span>
+          <div class="film-frame">
+            <div class="film-bars"><span class="film-bar" style="height:22px"></span><span class="film-bar" style="height:30px"></span><span class="film-bar" style="height:14px"></span><span class="film-bar film-bar-hl" style="height:24px"></span></div>
+            <span class="film-label">Step 4</span>
+          </div>
+          <span class="film-arrow" aria-hidden="true">→</span>
+          <div class="film-frame film-frame-active">
+            <div class="film-bars"><span class="film-bar film-bar-done" style="height:28px"></span><span class="film-bar film-bar-done" style="height:32px"></span><span class="film-bar film-bar-done" style="height:20px"></span><span class="film-bar film-bar-done" style="height:26px"></span></div>
+            <span class="film-label film-label-done">Done</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FINAL CTA -->
+  <section class="final-cta">
+    <div class="wave-bg" aria-hidden="true">
+      <svg width="100%" height="100%" viewBox="0 0 1000 220" preserveAspectRatio="none">
+        <path d="M0 140 Q 150 60 300 130 T 600 110 T 1000 140" fill="none" stroke="#2A2E27" stroke-width="1"/>
+        <path d="M0 170 Q 180 100 360 160 T 700 150 T 1000 180" fill="none" stroke="#2A2E27" stroke-width="1"/>
+        <circle cx="150" cy="90" r="3" fill="#C6FF4E"/>
+        <circle cx="300" cy="115" r="3" fill="#C6FF4E"/>
+        <circle cx="700" cy="145" r="3" fill="#C6FF4E"/>
+        <circle cx="850" cy="105" r="3" fill="#C6FF4E"/>
+      </svg>
+    </div>
+    <div class="section-inner">
+      <span class="pill">Ready to get started?</span>
+      <h2>Start Your <span class="ink-lime">DSA Journey</span> Today.</h2>
+      <p>Explore concepts. Visualize algorithms. Practice problems. Track your progress.</p>
+      <a href="#understand" class="btn btn-primary btn-lg">Get Started →</a>
+    </div>
+  </section>
+
+</main>
+
+<!-- FOOTER -->
+<footer class="footer">
+  <div class="section-inner footer-inner">
+    <div class="footer-brand">
+      <span class="brand">
+        <span class="brand-mark" aria-hidden="true">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M12 3L22 20H2L12 3Z" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/></svg>
+        </span>
+        DSA Virtual Lab
+      </span>
+      <p>An interactive environment for learning Data Structures and Algorithms through visualization, practice, and experimentation.</p>
+      <div class="social-row">
+        <a href="#" class="social-btn" aria-label="GitHub">⌥</a>
+        <a href="#" class="social-btn" aria-label="LinkedIn">in</a>
+        <a href="#" class="social-btn" aria-label="Email">✉</a>
+      </div>
+    </div>
+
+    <div class="footer-col">
+      <h4>Explore</h4>
+      <a href="#understand">Explore DSA</a>
+      <a href="#virtual-lab">Virtual Lab</a>
+      <a href="#how-it-helps">Practice</a>
+    </div>
+
+    <div class="footer-col">
+      <h4>Resources</h4>
+      <a href="#">Algorithms</a>
+      <a href="#">Data Structures</a>
+      <a href="#">Learning Guide</a>
+    </div>
+
+    <div class="footer-col">
+      <h4>Project</h4>
+      <a href="#">About</a>
+      <a href="#">GitHub</a>
+      <a href="#">Contact</a>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <span>© 2026 DSA Virtual Lab. Built for students who want to understand, not memorize.</span>
+    <span class="footer-legal"><a href="#">Privacy Policy</a> | <a href="#">Terms of Use</a></span>
+  </div>
+</footer>
+
+<script src="script.js"></script>
+</body>
+</html>
