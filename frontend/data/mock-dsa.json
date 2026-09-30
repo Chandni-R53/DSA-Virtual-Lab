@@ -1,0 +1,1895 @@
+{
+  "categories": [
+    {
+      "id": "foundations",
+      "title": "Foundations",
+      "icon": "foundations",
+      "exampleConcepts": ["Time Complexity", "Space Complexity", "Recursion"],
+      "concepts": [
+        {
+          "id": "time-complexity",
+          "title": "Time Complexity",
+          "type": "Concept",
+          "overview": "Time complexity quantifies the amount of computational time an algorithm takes to run as a function of the input size (n). It describes algorithm efficiency and scaling behavior rather than wall-clock seconds.",
+          "whyUse": "Critical for predicting how algorithms perform with massive datasets, preventing system bottlenecks, and making informed trade-offs between competing approaches.",
+          "howItWorks": [
+            "Count primitive operations executed by the algorithm as a function f(n).",
+            "Identify the dominant term as n approaches infinity.",
+            "Drop constant coefficients and lower-order terms to classify into Big-O notation."
+          ],
+          "example": {
+            "description": "Comparison of linear vs. logarithmic time growth for n = 1,000,000 operations.",
+            "indices": ["O(1)", "O(log n)", "O(n)", "O(n log n)", "O(n²)"],
+            "values": ["1 ops", "20 ops", "10⁶ ops", "2×10⁷ ops", "10¹² ops"],
+            "highlightIndex": 1
+          },
+          "operations": [
+            { "name": "Constant Time", "complexity": "O(1)", "description": "Hash map lookup, array index access" },
+            { "name": "Logarithmic Time", "complexity": "O(log n)", "description": "Binary search, balanced tree lookups" },
+            { "name": "Linear Time", "complexity": "O(n)", "description": "Single-pass array scan, string parsing" },
+            { "name": "Quadratic Time", "complexity": "O(n²)", "description": "Nested loops, brute-force pair comparisons" }
+          ],
+          "complexity": { "time": "Varies by algorithm", "space": "O(1) analytical metric" },
+          "pseudocode": [
+            "// Linear search takes O(n) time:",
+            "function findItem(arr, target):",
+            "  for i = 0 to length(arr) - 1:",
+            "    if arr[i] == target: return i",
+            "  return -1"
+          ],
+          "keyTakeaways": [
+            "Big-O measures worst-case asymptotic upper bounds.",
+            "Focus on the dominant order of growth as input size scales.",
+            "O(1) < O(log n) < O(n) < O(n log n) < O(n²) < O(2ⁿ)."
+          ]
+        },
+        {
+          "id": "space-complexity",
+          "title": "Space Complexity",
+          "type": "Concept",
+          "overview": "Space complexity measures the total amount of memory space required by an algorithm during execution as a function of the input size n, including both input space and auxiliary memory.",
+          "whyUse": "Crucial for memory-constrained environments like mobile devices, embedded systems, and distributed stream processors handling massive real-time streams.",
+          "howItWorks": [
+            "Account for fixed memory needed for basic constants and simple variables.",
+            "Account for variable dynamic memory allocated on the heap (arrays, graphs).",
+            "Account for call-stack frames allocated during nested recursive invocations."
+          ],
+          "example": {
+            "description": "Call stack frames generated during recursive factorial evaluation of n = 4.",
+            "indices": ["Frame 1", "Frame 2", "Frame 3", "Frame 4"],
+            "values": ["fact(4)", "fact(3)", "fact(2)", "fact(1)"],
+            "highlightIndex": 3
+          },
+          "operations": [
+            { "name": "In-place Mutation", "complexity": "O(1)", "description": "Modifies data structures with zero extra allocation" },
+            { "name": "Call Stack Overhead", "complexity": "O(d)", "description": "Depth d of the recursive call tree" },
+            { "name": "Buffer Allocation", "complexity": "O(n)", "description": "Auxiliary hash sets, arrays, or queues" }
+          ],
+          "complexity": { "time": "N/A", "space": "Analyzes auxiliary + input memory" },
+          "pseudocode": [
+            "// In-place pointer swap: O(1) auxiliary space",
+            "function reverse(arr):",
+            "  left = 0, right = length(arr) - 1",
+            "  while left < right:",
+            "    swap(arr[left], arr[right])",
+            "    left++, right--"
+          ],
+          "keyTakeaways": [
+            "Auxiliary space refers to temporary memory beyond the input itself.",
+            "Recursive solutions always consume stack memory equal to tree depth.",
+            "Often traded off against time complexity (e.g. memoization tables)."
+          ]
+        },
+        {
+          "id": "recursion-foundations",
+          "title": "Recursion",
+          "type": "Technique",
+          "overview": "A computational method where a function solves a problem by calling copies of itself with smaller subproblems until reaching a base termination condition.",
+          "whyUse": "Simplifies problem expressions for naturally hierarchical structures like trees, graphs, directory traversal, and divide-and-conquer algorithms.",
+          "howItWorks": [
+            "Define one or more base cases that terminate recursion without further calls.",
+            "Deconstruct the problem into smaller subproblems with identical structure.",
+            "Combine subproblem results as stack frames unwind toward the root call."
+          ],
+          "example": {
+            "description": "Calculating factorial(4) = 4 × 3 × 2 × 1 = 24 via recursive unwinding.",
+            "indices": ["n = 1", "n = 2", "n = 3", "n = 4"],
+            "values": ["1", "2", "6", "24"],
+            "highlightIndex": 3
+          },
+          "operations": [
+            { "name": "Base Check", "complexity": "O(1)", "description": "Evaluates base condition guard" },
+            { "name": "Recursive Call", "complexity": "O(1) push", "description": "Pushes new execution frame to call stack" },
+            { "name": "Frame Return", "complexity": "O(1) pop", "description": "Pops active frame and returns computed value" }
+          ],
+          "complexity": { "time": "O(n) for linear recursion", "space": "O(n) call stack depth" },
+          "pseudocode": [
+            "function factorial(n):",
+            "  if n <= 1: return 1           // Base case",
+            "  return n * factorial(n - 1)   // Recursive case"
+          ],
+          "keyTakeaways": [
+            "Every recursive function requires a guaranteed base case to avoid stack overflow.",
+            "Each recursive call pushes arguments and local variables onto the call stack.",
+            "Tail-call optimization can convert qualifying recursion into iteration."
+          ]
+        }
+      ]
+    },
+    {
+      "id": "arrays-strings",
+      "title": "Arrays & Strings",
+      "icon": "arrays",
+      "exampleConcepts": ["Arrays", "Strings", "Prefix Sum"],
+      "concepts": [
+        {
+          "id": "arrays",
+          "title": "Arrays",
+          "type": "Data Structure",
+          "overview": "A fundamental linear data structure consisting of elements stored in contiguous memory locations, each addressable via a 0-based integer index.",
+          "whyUse": "Optimal choice when fast O(1) random access is needed and collection size is known or grows sequentially.",
+          "howItWorks": [
+            "Allocates a contiguous block of memory bytes.",
+            "Computes memory addresses directly: Address = BaseAddress + (Index × ElementSize).",
+            "Provides instant direct indexing without pointer traversal."
+          ],
+          "example": {
+            "description": "Sequential contiguous memory allocation with 0-based indices.",
+            "indices": [0, 1, 2, 3, 4],
+            "values": [10, 20, 30, 40, 50],
+            "highlightIndex": 2
+          },
+          "operations": [
+            { "name": "Index Access", "complexity": "O(1)", "description": "Direct memory offset math" },
+            { "name": "Linear Search", "complexity": "O(n)", "description": "Traversing elements sequentially" },
+            { "name": "Insertion (End)", "complexity": "O(1) amortized", "description": "Appending element to dynamic array" },
+            { "name": "Insertion (Middle)", "complexity": "O(n)", "description": "Requires shifting subsequent elements right" },
+            { "name": "Deletion", "complexity": "O(n)", "description": "Requires shifting remaining elements left" }
+          ],
+          "complexity": { "time": "O(1) Access, O(n) Search/Insert/Delete", "space": "O(n) contiguous storage" },
+          "pseudocode": [
+            "// Traversal and linear element check:",
+            "function contains(arr, target):",
+            "  for i = 0 to arr.length - 1:",
+            "    if arr[i] == target: return true",
+            "  return false"
+          ],
+          "keyTakeaways": [
+            "Contiguous memory layout enables cache-friendly spatial locality.",
+            "Instant O(1) random access by index calculation.",
+            "Inserting or deleting elements in the middle requires shifting O(n) elements."
+          ]
+        },
+        {
+          "id": "strings",
+          "title": "Strings",
+          "type": "Data Structure",
+          "overview": "A sequenced collection of characters represented using encoding schemes such as ASCII or UTF-8, typically implemented as character arrays.",
+          "whyUse": "Essential for text processing, tokenization, serialization, pattern recognition, and user communication.",
+          "howItWorks": [
+            "Stores characters sequentially in memory as contiguous byte sequences.",
+            "In many languages (Java, Python, JS), strings are immutable; mutations allocate new strings.",
+            "Operations often use two-pointer or rolling-hash paradigms."
+          ],
+          "example": {
+            "description": "Character sequence layout for string 'ALGO'.",
+            "indices": [0, 1, 2, 3],
+            "values": ["'A'", "'L'", "'G'", "'O'"],
+            "highlightIndex": 0
+          },
+          "operations": [
+            { "name": "Character Lookup", "complexity": "O(1)", "description": "Index into underlying buffer" },
+            { "name": "Substring Extraction", "complexity": "O(k)", "description": "Copies k characters to fresh string" },
+            { "name": "Concatenation", "complexity": "O(n + m)", "description": "Allocates combined buffer" }
+          ],
+          "complexity": { "time": "O(1) lookup, O(n) search/slice", "space": "O(n) character memory" },
+          "pseudocode": [
+            "// Palindrome check using two pointers:",
+            "function isPalindrome(s):",
+            "  left = 0, right = s.length - 1",
+            "  while left < right:",
+            "    if s[left] != s[right]: return false",
+            "    left++, right--",
+            "  return true"
+          ],
+          "keyTakeaways": [
+            "Immutable strings require StringBuilder or array buffers for efficient concatenation.",
+            "String matching algorithms (KMP, Rabin-Karp) reduce search from O(n×m) to linear O(n+m)."
+          ]
+        },
+        {
+          "id": "2d-arrays",
+          "title": "2D Arrays",
+          "type": "Data Structure",
+          "overview": "A grid-like data structure organized into rows and columns, mapped to 1D memory using row-major or column-major layout.",
+          "whyUse": "Used for tabular datasets, matrix computations, dynamic programming memo tables, image pixels, and graph adjacency representations.",
+          "howItWorks": [
+            "Organizes elements with coordinate pairs `[row][col]`.",
+            "Row-major mapping computes address: `Base + (row * cols + col) * size`.",
+            "Allows efficient nested traversal across rows and columns."
+          ],
+          "example": {
+            "description": "Matrix indices for a 2x3 grid.",
+            "indices": ["[0][0]", "[0][1]", "[0][2]", "[1][0]", "[1][1]", "[1][2]"],
+            "values": [1, 2, 3, 4, 5, 6],
+            "highlightIndex": 4
+          },
+          "operations": [
+            { "name": "Coordinate Access", "complexity": "O(1)", "description": "Direct offset arithmetic" },
+            { "name": "Matrix Traversal", "complexity": "O(R × C)", "description": "Visits all R rows and C columns" }
+          ],
+          "complexity": { "time": "O(1) access, O(R × C) traversal", "space": "O(R × C) grid storage" },
+          "pseudocode": [
+            "for r = 0 to rows - 1:",
+            "  for c = 0 to cols - 1:",
+            "    process(matrix[r][c])"
+          ],
+          "keyTakeaways": [
+            "Traversing row-by-row maximizes CPU cache hit rates in row-major environments."
+          ]
+        },
+        {
+          "id": "prefix-sum",
+          "title": "Prefix Sum",
+          "type": "Technique",
+          "overview": "A precomputation technique that builds an auxiliary array where each index stores the cumulative sum of all elements up to that point.",
+          "whyUse": "Enables range sum queries on an array in O(1) time after a single O(n) preprocessing step.",
+          "howItWorks": [
+            "Construct prefix[i] = prefix[i - 1] + arr[i].",
+            "Calculate range sum between indices L and R: sum(L...R) = prefix[R] - prefix[L - 1]."
+          ],
+          "example": {
+            "description": "Prefix sum array for original values [3, 1, 4, 2].",
+            "indices": [0, 1, 2, 3],
+            "values": [3, 4, 8, 10],
+            "highlightIndex": 2
+          },
+          "operations": [
+            { "name": "Precomputation", "complexity": "O(n)", "description": "Single cumulative pass" },
+            { "name": "Range Sum Query", "complexity": "O(1)", "description": "Single subtraction between prefix boundaries" }
+          ],
+          "complexity": { "time": "O(1) per query", "space": "O(n) auxiliary prefix array" },
+          "pseudocode": [
+            "prefix[0] = arr[0]",
+            "for i = 1 to n - 1:",
+            "  prefix[i] = prefix[i - 1] + arr[i]",
+            "function query(L, R):",
+            "  return (L == 0) ? prefix[R] : prefix[R] - prefix[L - 1]"
+          ],
+          "keyTakeaways": [
+            "Trades O(n) memory to transform repeated O(n) range queries into O(1) lookups."
+          ]
+        },
+        {
+          "id": "sliding-window",
+          "title": "Sliding Window",
+          "type": "Technique",
+          "overview": "An algorithmic technique that maintains a continuous subsegment (window) over an array or string, expanding and shrinking boundaries dynamically.",
+          "whyUse": "Reduces brute-force O(n²) nested loop subsegment problems into optimal linear O(n) single-pass solutions.",
+          "howItWorks": [
+            "Maintain two pointers, left and right, defining window bounds.",
+            "Expand right pointer to include elements until window condition is met.",
+            "Contract left pointer to shrink window while preserving valid conditions."
+          ],
+          "example": {
+            "description": "Window of size k = 3 sliding across an array.",
+            "indices": ["[0..2]", "[1..3]", "[2..4]"],
+            "values": ["Sum=9", "Sum=12", "Sum=15"],
+            "highlightIndex": 1
+          },
+          "operations": [
+            { "name": "Add Element", "complexity": "O(1)", "description": "Expands window boundary rightward" },
+            { "name": "Remove Element", "complexity": "O(1)", "description": "Contracts window boundary leftward" }
+          ],
+          "complexity": { "time": "O(n) amortized", "space": "O(1) to O(k) for tracking window elements" },
+          "pseudocode": [
+            "left = 0, currentSum = 0",
+            "for right = 0 to n - 1:",
+            "  currentSum += arr[right]",
+            "  while windowIsInvalid():",
+            "    currentSum -= arr[left++]",
+            "  updateResult()"
+          ],
+          "keyTakeaways": [
+            "Both left and right pointers advance at most n times, giving guaranteed O(n) runtimes."
+          ]
+        },
+        {
+          "id": "two-pointers",
+          "title": "Two Pointers",
+          "type": "Technique",
+          "overview": "A pattern utilizing two reference pointers moving through a linear data structure in tandem, either toward each other or in the same direction.",
+          "whyUse": "Solves searching pairs, partitioning, reversing, and cycle detection with O(1) extra space.",
+          "howItWorks": [
+            "Initialize one pointer at the start and another at the end (converging), or both at start (fast/slow).",
+            "Evaluate conditions at pointer locations and advance one or both pointers accordingly."
+          ],
+          "example": {
+            "description": "Target sum pair search on sorted array [1, 2, 4, 7, 11] for target 9.",
+            "indices": ["left=1", "left=2", "right=7", "right=11"],
+            "values": ["arr[1]=2", "arr[2]=4", "arr[3]=7", "arr[4]=11"],
+            "highlightIndex": 2
+          },
+          "operations": [
+            { "name": "Advance Pointer", "complexity": "O(1)", "description": "Increment or decrement pointer index" },
+            { "name": "Compare Values", "complexity": "O(1)", "description": "Check target sum condition" }
+          ],
+          "complexity": { "time": "O(n) on sorted data", "space": "O(1) in-place auxiliary space" },
+          "pseudocode": [
+            "left = 0, right = arr.length - 1",
+            "while left < right:",
+            "  sum = arr[left] + arr[right]",
+            "  if sum == target: return [left, right]",
+            "  else if sum < target: left++",
+            "  else: right--"
+          ],
+          "keyTakeaways": [
+            "Frequently requires sorted inputs to guarantee monotonic pointer movement."
+          ]
+        }
+      ]
+    },
+    {
+      "id": "searching-sorting",
+      "title": "Searching & Sorting",
+      "icon": "sorting",
+      "exampleConcepts": ["Binary Search", "Quick Sort", "Merge Sort"],
+      "concepts": [
+        {
+          "id": "linear-search",
+          "title": "Linear Search",
+          "type": "Algorithm",
+          "overview": "The simplest search algorithm that sequentially checks every element in a list until a match is found or the end is reached.",
+          "whyUse": "Applicable to unsorted or unordered collections where no prior ordering guarantees exist.",
+          "howItWorks": [
+            "Start from index 0.",
+            "Compare each element against the search key.",
+            "Return matched index immediately, or -1 if the array is exhausted."
+          ],
+          "example": {
+            "description": "Checking each element for key = 7 in [4, 2, 7, 1].",
+            "indices": [0, 1, 2, 3],
+            "values": ["4 (≠)", "2 (≠)", "7 (=)", "Skipped"],
+            "highlightIndex": 2
+          },
+          "operations": [
+            { "name": "Compare", "complexity": "O(1)", "description": "Single element equality test" }
+          ],
+          "complexity": { "time": "O(n) worst/avg, O(1) best", "space": "O(1) in-place" },
+          "pseudocode": [
+            "function linearSearch(arr, key):",
+            "  for i = 0 to arr.length - 1:",
+            "    if arr[i] == key: return i",
+            "  return -1"
+          ],
+          "keyTakeaways": [
+            "Requires no preprocessing or sorting.",
+            "Suboptimal for frequent queries on large datasets."
+          ]
+        },
+        {
+          "id": "binary-search",
+          "title": "Binary Search",
+          "type": "Algorithm",
+          "overview": "An efficient divide-and-conquer search algorithm that repeatedly halves the search space of a sorted collection.",
+          "whyUse": "Orders of magnitude faster than linear search for large datasets; searches 1 billion elements in ~30 comparisons.",
+          "howItWorks": [
+            "Set left and right pointers to start and end of sorted array.",
+            "Compute midpoint: mid = left + (right - left) / 2.",
+            "If arr[mid] matches target, return mid. If target is smaller, search left half; otherwise search right half."
+          ],
+          "example": {
+            "description": "Searching for target 23 in sorted array [4, 8, 12, 16, 23, 42].",
+            "indices": [0, 1, 2, 3, 4, 5],
+            "values": [4, 8, 12, 16, 23, 42],
+            "highlightIndex": 4
+          },
+          "operations": [
+            { "name": "Midpoint Calculation", "complexity": "O(1)", "description": "Integer midpoint arithmetic" },
+            { "name": "Space Reduction", "complexity": "O(1)", "description": "Halves remaining candidates" }
+          ],
+          "complexity": { "time": "O(log n) worst/average", "space": "O(1) iterative" },
+          "pseudocode": [
+            "left = 0, right = arr.length - 1",
+            "while left <= right:",
+            "  mid = left + (right - left) / 2",
+            "  if arr[mid] == target: return mid",
+            "  else if arr[mid] < target: left = mid + 1",
+            "  else: right = mid - 1",
+            "return -1"
+          ],
+          "keyTakeaways": [
+            "Input array MUST be sorted.",
+            "Avoid integer overflow by calculating mid as left + (right - left) / 2."
+          ]
+        },
+        {
+          "id": "bubble-sort",
+          "title": "Bubble Sort",
+          "type": "Algorithm",
+          "overview": "A basic comparison-based sorting algorithm that repeatedly steps through the list, comparing adjacent items and swapping them if they are in wrong order.",
+          "whyUse": "Primarily used for educational foundations and detecting already-sorted arrays in O(n) with swap flag.",
+          "howItWorks": [
+            "Pass through array comparing pairs (i, i+1).",
+            "Swap out-of-order adjacent pairs so larger elements bubble to the end.",
+            "Repeat for n-1 passes."
+          ],
+          "example": {
+            "description": "First pass bubbling largest element 8 to the end: [5, 1, 4, 8].",
+            "indices": [0, 1, 2, 3],
+            "values": [1, 4, 5, 8],
+            "highlightIndex": 3
+          },
+          "operations": [
+            { "name": "Compare Adjacent", "complexity": "O(1)", "description": "Comparison of neighbor elements" },
+            { "name": "Swap", "complexity": "O(1)", "description": "In-place element swap" }
+          ],
+          "complexity": { "time": "O(n²) worst/avg, O(n) best", "space": "O(1) in-place" },
+          "pseudocode": [
+            "for i = 0 to n - 1:",
+            "  swapped = false",
+            "  for j = 0 to n - i - 2:",
+            "    if arr[j] > arr[j + 1]:",
+            "      swap(arr[j], arr[j + 1])",
+            "      swapped = true",
+            "  if not swapped: break"
+          ],
+          "keyTakeaways": [
+            "Stable in-place sorting algorithm.",
+            "Impractical for large datasets due to quadratic O(n²) comparisons."
+          ]
+        },
+        {
+          "id": "selection-sort",
+          "title": "Selection Sort",
+          "type": "Algorithm",
+          "overview": "An in-place comparison sort that divides the array into sorted and unsorted segments, repeatedly finding the minimum element from the unsorted segment and placing it at the front.",
+          "whyUse": "Minimizes memory writes; performs at most O(n) swaps, advantageous when write cycles are expensive.",
+          "howItWorks": [
+            "Find index of minimum element in unsorted subarray.",
+            "Swap found minimum with first element of unsorted subarray.",
+            "Advance boundary of sorted subarray by one position."
+          ],
+          "example": {
+            "description": "Selecting minimum 1 and swapping into index 0.",
+            "indices": [0, 1, 2, 3],
+            "values": [1, 5, 4, 8],
+            "highlightIndex": 0
+          },
+          "operations": [
+            { "name": "Find Min", "complexity": "O(n)", "description": "Scans remaining unsorted segment" },
+            { "name": "Swap to Front", "complexity": "O(1)", "description": "Places min at sorted boundary" }
+          ],
+          "complexity": { "time": "O(n²) in all cases", "space": "O(1) in-place" },
+          "pseudocode": [
+            "for i = 0 to n - 2:",
+            "  minIdx = i",
+            "  for j = i + 1 to n - 1:",
+            "    if arr[j] < arr[minIdx]: minIdx = j",
+            "  swap(arr[i], arr[minIdx])"
+          ],
+          "keyTakeaways": [
+            "Always takes O(n²) time regardless of initial ordering.",
+            "Makes at most O(n) swaps."
+          ]
+        },
+        {
+          "id": "insertion-sort",
+          "title": "Insertion Sort",
+          "type": "Algorithm",
+          "overview": "A simple sorting algorithm that builds the final sorted array one item at a time, inserting each element into its appropriate position among previously sorted elements.",
+          "whyUse": "Exceptionally fast on small datasets (n < 20) and nearly-sorted arrays; used as hybrid base case in Timsort.",
+          "howItWorks": [
+            "Iterate from index 1 to n - 1.",
+            "Compare current element (key) with predecessors.",
+            "Shift greater predecessor elements one position up, then insert key."
+          ],
+          "example": {
+            "description": "Inserting element 3 into sorted prefix [1, 4, 5].",
+            "indices": [0, 1, 2, 3],
+            "values": [1, 3, 4, 5],
+            "highlightIndex": 1
+          },
+          "operations": [
+            { "name": "Key Extraction", "complexity": "O(1)", "description": "Stores current element" },
+            { "name": "Predecessor Shift", "complexity": "O(k)", "description": "Shifts larger elements right" }
+          ],
+          "complexity": { "time": "O(n²) worst, O(n) best for sorted input", "space": "O(1) in-place" },
+          "pseudocode": [
+            "for i = 1 to n - 1:",
+            "  key = arr[i], j = i - 1",
+            "  while j >= 0 and arr[j] > key:",
+            "    arr[j + 1] = arr[j]",
+            "    j--",
+            "  arr[j + 1] = key"
+          ],
+          "keyTakeaways": [
+            "Adaptive algorithm: runs in O(n) time when array is already sorted.",
+            "Stable and in-place."
+          ]
+        },
+        {
+          "id": "merge-sort",
+          "title": "Merge Sort",
+          "type": "Algorithm",
+          "overview": "An efficient, stable, divide-and-conquer sorting algorithm that divides the array into halves, recursively sorts them, and merges the sorted halves.",
+          "whyUse": "Guarantees deterministic O(n log n) performance even in worst case; ideal for linked lists and external disk sorting.",
+          "howItWorks": [
+            "Divide array into two equal halves until single-element arrays remain.",
+            "Recursively sort both halves.",
+            "Merge two sorted halves by comparing head elements into an auxiliary array."
+          ],
+          "example": {
+            "description": "Merging sorted halves [2, 5] and [1, 6] into [1, 2, 5, 6].",
+            "indices": [0, 1, 2, 3],
+            "values": [1, 2, 5, 6],
+            "highlightIndex": 0
+          },
+          "operations": [
+            { "name": "Divide", "complexity": "O(1)", "description": "Splits array at midpoint" },
+            { "name": "Merge", "complexity": "O(n)", "description": "Linear two-pointer merge pass" }
+          ],
+          "complexity": { "time": "O(n log n) in all cases", "space": "O(n) auxiliary buffer" },
+          "pseudocode": [
+            "function mergeSort(arr, left, right):",
+            "  if left >= right: return",
+            "  mid = left + (right - left) / 2",
+            "  mergeSort(arr, left, mid)",
+            "  mergeSort(arr, mid + 1, right)",
+            "  merge(arr, left, mid, right)"
+          ],
+          "keyTakeaways": [
+            "Consistent O(n log n) performance regardless of input distribution.",
+            "Requires O(n) extra space for arrays."
+          ]
+        },
+        {
+          "id": "quick-sort",
+          "title": "Quick Sort",
+          "type": "Algorithm",
+          "overview": "A widely used divide-and-conquer sorting algorithm that selects a pivot element and partitions the array into values smaller than and greater than the pivot.",
+          "whyUse": "Often the fastest general-purpose sort in practice due to exceptional cache locality and in-place partitioning.",
+          "howItWorks": [
+            "Choose a pivot element from array.",
+            "Partition elements so smaller values are left and larger are right.",
+            "Recursively apply quicksort to left and right subarrays."
+          ],
+          "example": {
+            "description": "Partitioning around pivot 5: [2, 3, 5, 8, 9].",
+            "indices": [0, 1, 2, 3, 4],
+            "values": [2, 3, "Pivot 5", 8, 9],
+            "highlightIndex": 2
+          },
+          "operations": [
+            { "name": "Partition", "complexity": "O(n)", "description": "Reorders elements relative to pivot" },
+            { "name": "Recursive Partition", "complexity": "O(log n) avg depth", "description": "Subarray recursion" }
+          ],
+          "complexity": { "time": "O(n log n) avg, O(n²) worst", "space": "O(log n) call stack" },
+          "pseudocode": [
+            "function quickSort(arr, low, high):",
+            "  if low < high:",
+            "    pi = partition(arr, low, high)",
+            "    quickSort(arr, low, pi - 1)",
+            "    quickSort(arr, pi + 1, high)"
+          ],
+          "keyTakeaways": [
+            "Randomized pivot selection avoids O(n²) worst case on sorted arrays.",
+            "In-place and cache-friendly."
+          ]
+        }
+      ]
+    },
+    {
+      "id": "linked-lists",
+      "title": "Linked Lists",
+      "icon": "linked-lists",
+      "exampleConcepts": ["Singly Linked List", "Doubly Linked List", "Reverse List"],
+      "concepts": [
+        {
+          "id": "singly-linked-list",
+          "title": "Singly Linked List",
+          "type": "Data Structure",
+          "overview": "A linear collection of data nodes where each node contains a value and a pointer reference to the next node in the sequence.",
+          "whyUse": "Provides O(1) constant-time insertions and deletions at the head without memory reallocation or element shifting.",
+          "howItWorks": [
+            "Nodes are allocated dynamically on the heap at arbitrary memory locations.",
+            "Each node stores `data` and `next` pointer.",
+            "Traversed sequentially from `head` until `next == null`."
+          ],
+          "example": {
+            "description": "Node pointers chaining: [10] -> [20] -> [30] -> null.",
+            "indices": ["Head", "Node 1", "Node 2", "Tail"],
+            "values": ["10 ->", "20 ->", "30 ->", "null"],
+            "highlightIndex": 0
+          },
+          "operations": [
+            { "name": "Insert at Head", "complexity": "O(1)", "description": "Point new node to head and update head" },
+            { "name": "Delete at Head", "complexity": "O(1)", "description": "Advance head to head.next" },
+            { "name": "Search / Access", "complexity": "O(n)", "description": "Must traverse nodes sequentially" }
+          ],
+          "complexity": { "time": "O(1) head insert/delete, O(n) access", "space": "O(n) node + pointer storage" },
+          "pseudocode": [
+            "function insertHead(value):",
+            "  newNode = new Node(value)",
+            "  newNode.next = head",
+            "  head = newNode"
+          ],
+          "keyTakeaways": [
+            "Dynamic size with no wasted preallocated memory.",
+            "No random access: reaching index k requires traversing k pointers."
+          ]
+        },
+        {
+          "id": "doubly-linked-list",
+          "title": "Doubly Linked List",
+          "type": "Data Structure",
+          "overview": "A linked list where each node contains references to both its next successor and its previous predecessor node.",
+          "whyUse": "Allows bidirectional traversal and O(1) node deletion given a direct pointer to the target node.",
+          "howItWorks": [
+            "Each node maintains `prev`, `data`, and `next` references.",
+            "Head's prev and Tail's next point to null.",
+            "Removal adjusts both neighbor pointers directly."
+          ],
+          "example": {
+            "description": "Bidirectional links: null <- [A] <-> [B] <-> [C] -> null.",
+            "indices": ["Node A", "Node B", "Node C"],
+            "values": ["<- A ->", "<- B ->", "<- C ->"],
+            "highlightIndex": 1
+          },
+          "operations": [
+            { "name": "Delete Given Node", "complexity": "O(1)", "description": "node.prev.next = node.next" },
+            { "name": "Insert Before Node", "complexity": "O(1)", "description": "Updates 4 neighbor pointers" }
+          ],
+          "complexity": { "time": "O(1) insertion/deletion with reference", "space": "O(n) with extra prev pointer overhead" },
+          "pseudocode": [
+            "function deleteNode(node):",
+            "  if node.prev: node.prev.next = node.next",
+            "  if node.next: node.next.prev = node.prev"
+          ],
+          "keyTakeaways": [
+            "Foundation for LRU Cache implementations when paired with hash tables."
+          ]
+        },
+        {
+          "id": "circular-linked-list",
+          "title": "Circular Linked List",
+          "type": "Data Structure",
+          "overview": "A linked list variation where the last node points back to the first node, forming an unbroken circular loop.",
+          "whyUse": "Useful for round-robin CPU task scheduling, media playlist loops, and multiplayer turn management.",
+          "howItWorks": [
+            "The tail node's `next` pointer refers directly back to `head` instead of null.",
+            "Traversal must track start node to detect completed cycle."
+          ],
+          "example": {
+            "description": "Continuous loop: [1] -> [2] -> [3] -> [1]...",
+            "indices": ["P1", "P2", "P3"],
+            "values": ["Task 1", "Task 2", "Task 3 (-> P1)"],
+            "highlightIndex": 2
+          },
+          "operations": [
+            { "name": "Cycle Step", "complexity": "O(1)", "description": "Advances pointer infinitely" }
+          ],
+          "complexity": { "time": "O(1) rotation, O(n) search", "space": "O(n)" },
+          "pseudocode": [
+            "current = head",
+            "do:",
+            "  process(current.value)",
+            "  current = current.next",
+            "while current != head"
+          ],
+          "keyTakeaways": [
+            "Eliminates null-pointer checks at boundaries."
+          ]
+        },
+        {
+          "id": "linked-list-operations",
+          "title": "Linked List Operations",
+          "type": "Concept",
+          "overview": "Core manipulation algorithms for linked lists including insertion, deletion, cycle detection (Floyd's algorithm), and finding the midpoint.",
+          "whyUse": "Essential building blocks for technical interviews and low-level data structures.",
+          "howItWorks": [
+            "Use fast and slow pointer pairs (tortoise and hare).",
+            "Fast advances 2 nodes per step while slow advances 1 node.",
+            "Intersection indicates cycle presence; end indicates midpoint."
+          ],
+          "example": {
+            "description": "Midpoint detection using slow (step 1) and fast (step 2) pointers.",
+            "indices": ["Node 1", "Node 2 (Slow)", "Node 3", "Node 4 (Fast)"],
+            "values": ["10", "20 (Mid)", "30", "40"],
+            "highlightIndex": 1
+          },
+          "operations": [
+            { "name": "Cycle Detect", "complexity": "O(n)", "description": "Floyd's Tortoise and Hare" },
+            { "name": "Find Middle", "complexity": "O(n)", "description": "Single-pass two-pointer traversal" }
+          ],
+          "complexity": { "time": "O(n) single pass", "space": "O(1) two pointers" },
+          "pseudocode": [
+            "slow = head, fast = head",
+            "while fast != null and fast.next != null:",
+            "  slow = slow.next",
+            "  fast = fast.next.next",
+            "return slow // midpoint"
+          ],
+          "keyTakeaways": [
+            "Two pointers enable single-pass operations with O(1) auxiliary memory."
+          ]
+        },
+        {
+          "id": "reverse-linked-list",
+          "title": "Reverse Linked List",
+          "type": "Algorithm",
+          "overview": "An in-place algorithm that reverses the direction of all pointer links in a singly linked list.",
+          "whyUse": "Fundamental list manipulation pattern used in palindrome checks, big integer math, and reordering.",
+          "howItWorks": [
+            "Track three pointers: `prev` (null), `curr` (head), and `next`.",
+            "Store curr.next, reverse link to prev, then advance prev and curr forward.",
+            "Repeat until curr is null; prev becomes the new head."
+          ],
+          "example": {
+            "description": "Reversing [1] -> [2] -> [3] to [3] -> [2] -> [1].",
+            "indices": ["Prev", "Curr", "Next"],
+            "values": ["null <- [1]", "[2] -> [3]", "[3]"],
+            "highlightIndex": 0
+          },
+          "operations": [
+            { "name": "Pointer Inversion", "complexity": "O(1)", "description": "Inverts link between current and previous" }
+          ],
+          "complexity": { "time": "O(n) linear scan", "space": "O(1) iterative" },
+          "pseudocode": [
+            "prev = null, curr = head",
+            "while curr != null:",
+            "  nextTemp = curr.next",
+            "  curr.next = prev",
+            "  prev = curr",
+            "  curr = nextTemp",
+            "return prev // new head"
+          ],
+          "keyTakeaways": [
+            "Must preserve next pointer reference before overwriting curr.next."
+          ]
+        }
+      ]
+    },
+    {
+      "id": "stack-queue",
+      "title": "Stack & Queue",
+      "icon": "stack-queue",
+      "exampleConcepts": ["Stack", "Queue", "Priority Queue"],
+      "concepts": [
+        {
+          "id": "stack",
+          "title": "Stack",
+          "type": "Data Structure",
+          "overview": "A linear data structure following the LIFO (Last-In, First-Out) principle, where elements are inserted and removed exclusively from the top.",
+          "whyUse": "Essential for expression evaluation, syntax parsing, undo/redo mechanisms, and backtracking depth-first search.",
+          "howItWorks": [
+            "Push: Places a new element onto the top of the stack.",
+            "Pop: Removes and returns the topmost element.",
+            "Peek: Inspects the top element without removing it."
+          ],
+          "example": {
+            "description": "Stack state after pushing 10, 20, 30: Top is 30.",
+            "indices": ["Bottom", "Middle", "Top"],
+            "values": ["[10]", "[20]", "[30] (Top)"],
+            "highlightIndex": 2
+          },
+          "operations": [
+            { "name": "Push", "complexity": "O(1)", "description": "Adds element to top" },
+            { "name": "Pop", "complexity": "O(1)", "description": "Removes and returns top element" },
+            { "name": "Peek", "complexity": "O(1)", "description": "Reads top element" }
+          ],
+          "complexity": { "time": "O(1) all top operations", "space": "O(n) storage" },
+          "pseudocode": [
+            "stack.push(item)",
+            "topItem = stack.pop()",
+            "if stack.isEmpty(): alert('Empty')"
+          ],
+          "keyTakeaways": [
+            "Strict LIFO ordering ensures most recent items are processed first.",
+            "Forms the operational engine of CPU call stacks."
+          ]
+        },
+        {
+          "id": "queue",
+          "title": "Queue",
+          "type": "Data Structure",
+          "overview": "A linear data structure following the FIFO (First-In, First-Out) principle, where elements are enqueued at the rear and dequeued from the front.",
+          "whyUse": "Essential for breadth-first graph traversal, printer spools, request queues, and asynchronous messaging pipelines.",
+          "howItWorks": [
+            "Enqueue: Appends a new item to the back (tail) of the queue.",
+            "Dequeue: Removes and returns the oldest item from the front (head).",
+            "Maintains arrival sequence integrity."
+          ],
+          "example": {
+            "description": "Queue ordering: Front dequeues first.",
+            "indices": ["Front", "Mid 1", "Rear"],
+            "values": ["[10] (Front)", "[20]", "[30] (Rear)"],
+            "highlightIndex": 0
+          },
+          "operations": [
+            { "name": "Enqueue", "complexity": "O(1)", "description": "Adds item to back" },
+            { "name": "Dequeue", "complexity": "O(1)", "description": "Removes item from front" }
+          ],
+          "complexity": { "time": "O(1) enqueue and dequeue", "space": "O(n)" },
+          "pseudocode": [
+            "queue.enqueue(x)",
+            "served = queue.dequeue()"
+          ],
+          "keyTakeaways": [
+            "Guarantees fair First-Come, First-Served order.",
+            "Array-based queues require ring buffer logic to prevent memory drift."
+          ]
+        },
+        {
+          "id": "circular-queue",
+          "title": "Circular Queue",
+          "type": "Data Structure",
+          "overview": "A fixed-size ring buffer implementation of a queue where the last position connects back to the first position.",
+          "whyUse": "Avoids wasting empty slots created at the front of an array during dequeue operations without shifting elements.",
+          "howItWorks": [
+            "Uses modulo arithmetic for pointer advancement: `rear = (rear + 1) % capacity`.",
+            "Determines full/empty state by comparing front and rear indices."
+          ],
+          "example": {
+            "description": "Circular ring wrapping around index boundaries.",
+            "indices": ["0 (Front)", "1", "2 (Rear)", "3 (Empty)"],
+            "values": ["[A]", "[B]", "[C]", "[ ]"],
+            "highlightIndex": 0
+          },
+          "operations": [
+            { "name": "Enqueue Ring", "complexity": "O(1)", "description": "rear = (rear + 1) % capacity" },
+            { "name": "Dequeue Ring", "complexity": "O(1)", "description": "front = (front + 1) % capacity" }
+          ],
+          "complexity": { "time": "O(1)", "space": "O(k) fixed capacity" },
+          "pseudocode": [
+            "rear = (rear + 1) % capacity",
+            "buffer[rear] = value"
+          ],
+          "keyTakeaways": [
+            "Maximizes fixed-memory efficiency in audio buffers and network sockets."
+          ]
+        },
+        {
+          "id": "deque",
+          "title": "Deque",
+          "type": "Data Structure",
+          "overview": "A Double-Ended Queue that supports constant-time element insertion and deletion at both ends (front and back).",
+          "whyUse": "Optimal for sliding window maximum problems, palindrome checkers, and bidirectional history caches.",
+          "howItWorks": [
+            "Provides four core operations: pushFront, pushBack, popFront, popBack.",
+            "Implemented using doubly linked lists or dynamic circular arrays."
+          ],
+          "example": {
+            "description": "Double ended operations at left and right.",
+            "indices": ["Front", "Item 2", "Back"],
+            "values": ["<-- [10]", "[20]", "[30] -->"],
+            "highlightIndex": 0
+          },
+          "operations": [
+            { "name": "pushFront / popFront", "complexity": "O(1)", "description": "Front mutations" },
+            { "name": "pushBack / popBack", "complexity": "O(1)", "description": "Back mutations" }
+          ],
+          "complexity": { "time": "O(1) all end operations", "space": "O(n)" },
+          "pseudocode": [
+            "deque.pushFront(1)",
+            "deque.pushBack(2)",
+            "val = deque.popFront()"
+          ],
+          "keyTakeaways": [
+            "Generalizes both stack and queue into a single high-performance structure."
+          ]
+        },
+        {
+          "id": "priority-queue",
+          "title": "Priority Queue",
+          "type": "Data Structure",
+          "overview": "An abstract data type where each element has an associated priority; elements with highest priority are dequeued before lower priority items.",
+          "whyUse": "Core component in Dijkstra's shortest path, Prim's algorithm, Huffman encoding, and OS task scheduling.",
+          "howItWorks": [
+            "Typically implemented using a Binary Heap.",
+            "Maintains heap property: parent priority >= children priority.",
+            "Extract-Max/Min removes root and restores heap order via sift-down."
+          ],
+          "example": {
+            "description": "Max Priority Queue: Highest priority served first.",
+            "indices": ["Pri=99", "Pri=50", "Pri=12"],
+            "values": ["Emergency", "Urgent", "Routine"],
+            "highlightIndex": 0
+          },
+          "operations": [
+            { "name": "Insert", "complexity": "O(log n)", "description": "Inserts and bubbles up" },
+            { "name": "Extract Max/Min", "complexity": "O(log n)", "description": "Pulls root and sifts down" },
+            { "name": "Peek", "complexity": "O(1)", "description": "Inspects root element" }
+          ],
+          "complexity": { "time": "O(log n) insert/extract, O(1) peek", "space": "O(n)" },
+          "pseudocode": [
+            "pq.insert(item, priority)",
+            "highest = pq.extractMax()"
+          ],
+          "keyTakeaways": [
+            "Binary heap implementation guarantees logarithmic O(log n) maintenance."
+          ]
+        }
+      ]
+    },
+    {
+      "id": "hashing",
+      "title": "Hashing",
+      "icon": "hashing",
+      "exampleConcepts": ["Hash Map", "Hash Set", "Frequency Count"],
+      "concepts": [
+        {
+          "id": "hashing-basics",
+          "title": "Hashing",
+          "type": "Concept",
+          "overview": "A computational method of mapping arbitrary-sized keys to fixed-size table indices using a deterministic hash function.",
+          "whyUse": "Delivers near-instantaneous average O(1) lookups, insertions, and deletions across massive datasets.",
+          "howItWorks": [
+            "Pass key through a hash function: `index = hash(key) % capacity`.",
+            "Resolve collisions via Separate Chaining (linked lists) or Open Addressing (probing).",
+            "Rehash to larger buckets when load factor threshold (e.g. 0.75) is exceeded."
+          ],
+          "example": {
+            "description": "Mapping string 'user_42' to table index 3.",
+            "indices": ["Slot 0", "Slot 1", "Slot 2", "Slot 3"],
+            "values": ["[null]", "[null]", "[null]", "['user_42': Data]"],
+            "highlightIndex": 3
+          },
+          "operations": [
+            { "name": "Hash Function", "complexity": "O(key length)", "description": "Computes integer hash code" },
+            { "name": "Collision Resolution", "complexity": "O(1) avg", "description": "Chaining or linear probing" }
+          ],
+          "complexity": { "time": "O(1) average, O(n) worst case collision", "space": "O(n) bucket array" },
+          "pseudocode": [
+            "index = hashFunction(key) % tableSize",
+            "bucket = table[index]",
+            "bucket.insert(key, value)"
+          ],
+          "keyTakeaways": [
+            "A good hash function distributes keys uniformly to avoid clustering.",
+            "Worst-case O(n) lookups occur if all keys collide into a single bucket."
+          ]
+        },
+        {
+          "id": "hash-map",
+          "title": "Hash Map",
+          "type": "Data Structure",
+          "overview": "An associative array data structure that stores key-value pairs, using hash codes for constant-time value retrieval.",
+          "whyUse": "The workhorse data structure of modern software: caches, symbol tables, database indexes, and fast counting.",
+          "howItWorks": [
+            "Stores entries `{key, value}` in hashed buckets.",
+            "Key uniqueness is enforced: inserting an existing key overwrites the previous value.",
+            "Provides constant-time `get(key)`, `put(key, value)`, and `remove(key)`."
+          ],
+          "example": {
+            "description": "Key-value mapping: 'alice' -> 95, 'bob' -> 88.",
+            "indices": ["'alice'", "'bob'", "'charlie'"],
+            "values": ["95", "88", "91"],
+            "highlightIndex": 0
+          },
+          "operations": [
+            { "name": "Get", "complexity": "O(1) avg", "description": "Instant key lookup" },
+            { "name": "Put", "complexity": "O(1) avg", "description": "Insert or update key-value" },
+            { "name": "Delete", "complexity": "O(1) avg", "description": "Removes key mapping" }
+          ],
+          "complexity": { "time": "O(1) avg / O(n) worst", "space": "O(n) storage" },
+          "pseudocode": [
+            "map.put('age', 24)",
+            "if map.containsKey('age'):",
+            "  print(map.get('age'))"
+          ],
+          "keyTakeaways": [
+            "Keys must be hashable and immutable to prevent corrupted bucket lookups."
+          ]
+        },
+        {
+          "id": "hash-set",
+          "title": "Hash Set",
+          "type": "Data Structure",
+          "overview": "A collection that stores unique elements with no duplicates, backed internally by a hash table.",
+          "whyUse": "Optimal for deduplication, membership testing, and set operations (union, intersection, difference).",
+          "howItWorks": [
+            "Stores unique keys without associated values (or dummy placeholder value).",
+            "Rejects insertions of elements already present in the set."
+          ],
+          "example": {
+            "description": "Unique set elements: { 5, 12, 42 }.",
+            "indices": ["Item 1", "Item 2", "Item 3"],
+            "values": [5, 12, 42],
+            "highlightIndex": 1
+          },
+          "operations": [
+            { "name": "Add", "complexity": "O(1) avg", "description": "Inserts item if absent" },
+            { "name": "Contains", "complexity": "O(1) avg", "description": "Instant membership check" }
+          ],
+          "complexity": { "time": "O(1) average lookup", "space": "O(n)" },
+          "pseudocode": [
+            "seen = new HashSet()",
+            "for item in list:",
+            "  if seen.contains(item): return 'Duplicate Found'",
+            "  seen.add(item)"
+          ],
+          "keyTakeaways": [
+            "Reduces O(n) nested array containment checks to O(1)."
+          ]
+        },
+        {
+          "id": "frequency-counting",
+          "title": "Frequency Counting",
+          "type": "Technique",
+          "overview": "A pattern that tallies element occurrence counts using a hash map to solve anagram, majority element, and subarray problems.",
+          "whyUse": "Solves complex counting and distribution problems in a single linear O(n) pass.",
+          "howItWorks": [
+            "Iterate through the collection.",
+            "For each element, increment `map[element] = (map[element] || 0) + 1`."
+          ],
+          "example": {
+            "description": "Character counts for string 'banana': { b:1, a:3, n:2 }.",
+            "indices": ["'b'", "'a'", "'n'"],
+            "values": [1, 3, 2],
+            "highlightIndex": 1
+          },
+          "operations": [
+            { "name": "Increment Count", "complexity": "O(1)", "description": "map[key]++" }
+          ],
+          "complexity": { "time": "O(n) single pass", "space": "O(k) unique elements" },
+          "pseudocode": [
+            "freq = {}",
+            "for ch in word:",
+            "  freq[ch] = (freq[ch] or 0) + 1"
+          ],
+          "keyTakeaways": [
+            "Linear time alternative to O(n log n) sorting for counting problems."
+          ]
+        }
+      ]
+    },
+    {
+      "id": "trees",
+      "title": "Trees",
+      "icon": "trees",
+      "exampleConcepts": ["Binary Tree", "Binary Search Tree", "Heap"],
+      "concepts": [
+        {
+          "id": "binary-tree",
+          "title": "Binary Tree",
+          "type": "Data Structure",
+          "overview": "A hierarchical tree data structure in which each parent node has at most two children, referred to as the left child and right child.",
+          "whyUse": "Models hierarchical data such as file systems, DOM trees, decision trees, and expression trees.",
+          "howItWorks": [
+            "Starts with a root node.",
+            "Each node contains data and references: `left` and `right`.",
+            "Nodes with zero children are leaf nodes."
+          ],
+          "example": {
+            "description": "Root 1 with left child 2 and right child 3.",
+            "indices": ["Root", "Left Child", "Right Child"],
+            "values": ["Node 1", "Node 2", "Node 3"],
+            "highlightIndex": 0
+          },
+          "operations": [
+            { "name": "Insert Child", "complexity": "O(1) with pointer", "description": "Attaches node to left or right" },
+            { "name": "Tree Traversal", "complexity": "O(n)", "description": "Visits all n nodes" }
+          ],
+          "complexity": { "time": "O(n) full traversal", "space": "O(h) stack where h is height" },
+          "pseudocode": [
+            "class TreeNode:",
+            "  val",
+            "  left = null",
+            "  right = null"
+          ],
+          "keyTakeaways": [
+            "A tree with n nodes has exactly n - 1 edges.",
+            "Height h is bounded by log₂(n) for balanced trees and n for degenerate linked trees."
+          ]
+        },
+        {
+          "id": "tree-traversal",
+          "title": "Tree Traversal",
+          "type": "Algorithm",
+          "overview": "Standardized strategies for visiting every node in a tree: Inorder, Preorder, Postorder (Depth-First), and Level-Order (Breadth-First).",
+          "whyUse": "Inorder traversal of BST yields sorted values; postorder is ideal for freeing trees and computing sub-tree sizes.",
+          "howItWorks": [
+            "Inorder: Left -> Root -> Right.",
+            "Preorder: Root -> Left -> Right.",
+            "Postorder: Left -> Right -> Root.",
+            "Level-Order: Explores layer-by-layer using a queue."
+          ],
+          "example": {
+            "description": "Inorder traversal visits left subtree, root, then right subtree.",
+            "indices": ["Step 1", "Step 2", "Step 3"],
+            "values": ["Visit Left", "Process Root", "Visit Right"],
+            "highlightIndex": 1
+          },
+          "operations": [
+            { "name": "DFS Traversal", "complexity": "O(n)", "description": "Recursive or stack-based" },
+            { "name": "BFS Level-Order", "complexity": "O(n)", "description": "Queue-based tier traversal" }
+          ],
+          "complexity": { "time": "O(n) visits all nodes", "space": "O(h) for DFS, O(w) for BFS width" },
+          "pseudocode": [
+            "function inorder(node):",
+            "  if node == null: return",
+            "  inorder(node.left)",
+            "  print(node.val)",
+            "  inorder(node.right)"
+          ],
+          "keyTakeaways": [
+            "DFS uses call stack memory proportional to height.",
+            "BFS uses queue memory proportional to maximum tree width."
+          ]
+        },
+        {
+          "id": "binary-search-tree",
+          "title": "Binary Search Tree",
+          "type": "Data Structure",
+          "overview": "A binary tree with the BST property: all left-subtree keys are smaller than root key, and all right-subtree keys are greater.",
+          "whyUse": "Enables fast O(log n) lookups, insertions, and deletions while maintaining ordered key sequences.",
+          "howItWorks": [
+            "Searching: Compare search key with root; recurse left if smaller, right if larger.",
+            "Insertion: Traverse down until reaching null, then attach new node.",
+            "Deletion: Handle 3 cases: leaf node, one child, or two children (replace with inorder successor)."
+          ],
+          "example": {
+            "description": "BST with Root 20: Left child is 10 (< 20), Right child is 30 (> 20).",
+            "indices": ["Left (<)", "Root", "Right (>)"],
+            "values": ["[10]", "[20]", "[30]"],
+            "highlightIndex": 1
+          },
+          "operations": [
+            { "name": "Search", "complexity": "O(log n) avg", "description": "Halves search space each branch" },
+            { "name": "Insert", "complexity": "O(log n) avg", "description": "Locates attachment point" },
+            { "name": "Delete", "complexity": "O(log n) avg", "description": "Rebalances or swaps successor" }
+          ],
+          "complexity": { "time": "O(log n) balanced, O(n) degenerate", "space": "O(h)" },
+          "pseudocode": [
+            "function search(node, key):",
+            "  if node == null or node.val == key: return node",
+            "  if key < node.val: return search(node.left, key)",
+            "  return search(node.right, key)"
+          ],
+          "keyTakeaways": [
+            "Self-balancing trees (AVL, Red-Black) prevent O(n) worst-case degradation."
+          ]
+        },
+        {
+          "id": "heap",
+          "title": "Heap",
+          "type": "Data Structure",
+          "overview": "A specialized complete binary tree satisfying the heap property: in a max heap, parents are >= children; in a min heap, parents are <= children.",
+          "whyUse": "Provides immediate O(1) retrieval of the minimum or maximum element, with O(log n) insertions and extractions.",
+          "howItWorks": [
+            "Compactly stored in a 1D array without explicit pointers.",
+            "Parent at index i: children at `2i + 1` and `2i + 2`.",
+            "Parent of node i: `(i - 1) / 2`."
+          ],
+          "example": {
+            "description": "Min-heap array representation: Root 5 is smallest.",
+            "indices": ["[0] Root", "[1] Child", "[2] Child", "[3]", "[4]"],
+            "values": [5, 10, 15, 20, 25],
+            "highlightIndex": 0
+          },
+          "operations": [
+            { "name": "Peek Min/Max", "complexity": "O(1)", "description": "Inspects array[0]" },
+            { "name": "Push (Insert)", "complexity": "O(log n)", "description": "Sift-up" },
+            { "name": "Pop (Extract)", "complexity": "O(log n)", "description": "Swap root with last, then sift-down" }
+          ],
+          "complexity": { "time": "O(1) peek, O(log n) push/pop, O(n) build", "space": "O(n) array" },
+          "pseudocode": [
+            "// Array index math for complete binary tree:",
+            "parent(i) = (i - 1) / 2",
+            "leftChild(i) = 2 * i + 1",
+            "rightChild(i) = 2 * i + 2"
+          ],
+          "keyTakeaways": [
+            "Complete binary tree property allows zero pointer overhead representation in arrays."
+          ]
+        }
+      ]
+    },
+    {
+      "id": "graphs",
+      "title": "Graphs",
+      "icon": "graphs",
+      "exampleConcepts": ["BFS", "DFS", "Shortest Path"],
+      "concepts": [
+        {
+          "id": "graph-representation",
+          "title": "Graph Representation",
+          "type": "Data Structure",
+          "overview": "A non-linear structure of vertices (nodes) connected by edges, represented via Adjacency Lists or Adjacency Matrices.",
+          "whyUse": "Models networks, social connections, road maps, recommendation engines, and dependency trees.",
+          "howItWorks": [
+            "Adjacency List: Array or map of lists storing neighbor vertices for each node; space-efficient O(V + E).",
+            "Adjacency Matrix: 2D boolean array of size V × V; fast O(1) edge lookups but consumes O(V²) space."
+          ],
+          "example": {
+            "description": "Adjacency list for vertex A connected to B and C.",
+            "indices": ["Vertex A", "Vertex B", "Vertex C"],
+            "values": ["-> [B, C]", "-> [A]", "-> [A]"],
+            "highlightIndex": 0
+          },
+          "operations": [
+            { "name": "Add Edge", "complexity": "O(1)", "description": "Appends to adjacency list" },
+            { "name": "Check Edge", "complexity": "O(degree(u))", "description": "Checks adjacency list" }
+          ],
+          "complexity": { "time": "O(1) add edge, O(V+E) scan", "space": "O(V + E) list, O(V²) matrix" },
+          "pseudocode": [
+            "adjList = {}",
+            "function addEdge(u, v):",
+            "  adjList[u].push(v)",
+            "  adjList[v].push(u) // if undirected"
+          ],
+          "keyTakeaways": [
+            "Use adjacency lists for sparse graphs (E << V²).",
+            "Use adjacency matrices for dense graphs or fast edge presence checks."
+          ]
+        },
+        {
+          "id": "bfs",
+          "title": "BFS",
+          "type": "Algorithm",
+          "overview": "Breadth-First Search traverses a graph level-by-level, visiting all immediate neighbors before advancing to subsequent depth tiers.",
+          "whyUse": "Guaranteed to find the shortest path in unweighted graphs.",
+          "howItWorks": [
+            "Use a queue and a visited set.",
+            "Enqueue start node and mark visited.",
+            "While queue is non-empty, dequeue vertex u and enqueue all unvisited neighbors."
+          ],
+          "example": {
+            "description": "BFS queue processing wave order from source 0.",
+            "indices": ["Level 0", "Level 1", "Level 2"],
+            "values": ["[0]", "[1, 2]", "[3, 4]"],
+            "highlightIndex": 0
+          },
+          "operations": [
+            { "name": "Enqueue Neighbor", "complexity": "O(1)", "description": "Pushes unvisited vertex" },
+            { "name": "Visit Check", "complexity": "O(1)", "description": "Prevents infinite cycles" }
+          ],
+          "complexity": { "time": "O(V + E)", "space": "O(V) queue and visited set" },
+          "pseudocode": [
+            "queue.push(start)",
+            "visited.add(start)",
+            "while not queue.isEmpty():",
+            "  curr = queue.pop()",
+            "  for neighbor in graph[curr]:",
+            "    if neighbor not in visited:",
+            "      visited.add(neighbor)",
+            "      queue.push(neighbor)"
+          ],
+          "keyTakeaways": [
+            "Always finds shortest path in unweighted graphs.",
+            "Requires tracking visited nodes to prevent cycles in graphs."
+          ]
+        },
+        {
+          "id": "dfs",
+          "title": "DFS",
+          "type": "Algorithm",
+          "overview": "Depth-First Search explores as deep as possible along each branch before backtracking, using recursion or an explicit stack.",
+          "whyUse": "Ideal for cycle detection, topological sorting, connected components, and solving maze puzzles.",
+          "howItWorks": [
+            "Mark current node as visited.",
+            "Recursively visit each unvisited neighbor.",
+            "Backtrack when all neighbors are exhausted."
+          ],
+          "example": {
+            "description": "DFS deep dive: 0 -> 1 -> 3 before backtracking to 2.",
+            "indices": ["Step 1", "Step 2", "Step 3", "Backtrack"],
+            "values": ["Visit 0", "Visit 1", "Visit 3", "Visit 2"],
+            "highlightIndex": 2
+          },
+          "operations": [
+            { "name": "Branch Dive", "complexity": "O(1)", "description": "Advances into neighbor" },
+            { "name": "Backtrack", "complexity": "O(1)", "description": "Returns from recursive call" }
+          ],
+          "complexity": { "time": "O(V + E)", "space": "O(V) call stack" },
+          "pseudocode": [
+            "function dfs(u):",
+            "  visited.add(u)",
+            "  for v in graph[u]:",
+            "    if v not in visited:",
+            "      dfs(v)"
+          ],
+          "keyTakeaways": [
+            "Call stack depth reaches V in worst-case linear graph paths."
+          ]
+        },
+        {
+          "id": "shortest-path",
+          "title": "Shortest Path",
+          "type": "Algorithm",
+          "overview": "Algorithms to find the minimum distance path between nodes in weighted graphs, prominently Dijkstra's and Bellman-Ford.",
+          "whyUse": "Powers GPS navigation, network packet routing, airline flight planners, and logistics optimization.",
+          "howItWorks": [
+            "Dijkstra: Greedily explores vertex with smallest known tentative distance using a priority queue.",
+            "Relaxes outgoing edges: if `dist[u] + weight(u,v) < dist[v]`, update `dist[v]`."
+          ],
+          "example": {
+            "description": "Shortest path distances from source S: S -> A (2), S -> B (5).",
+            "indices": ["Dist[S]", "Dist[A]", "Dist[B]"],
+            "values": ["0", "2", "5"],
+            "highlightIndex": 1
+          },
+          "operations": [
+            { "name": "Edge Relaxation", "complexity": "O(1)", "description": "Updates tentative path distance" },
+            { "name": "Min-Extract", "complexity": "O(log V)", "description": "Priority queue extraction" }
+          ],
+          "complexity": { "time": "O((V + E) log V) with min-heap", "space": "O(V) distance table" },
+          "pseudocode": [
+            "dist[start] = 0",
+            "pq.insert(start, 0)",
+            "while not pq.isEmpty():",
+            "  (u, d) = pq.extractMin()",
+            "  for (v, weight) in graph[u]:",
+            "    if dist[u] + weight < dist[v]:",
+            "      dist[v] = dist[u] + weight",
+            "      pq.insert(v, dist[v])"
+          ],
+          "keyTakeaways": [
+            "Dijkstra requires non-negative edge weights.",
+            "Use Bellman-Ford if negative edge weights exist."
+          ]
+        },
+        {
+          "id": "topological-sort",
+          "title": "Topological Sort",
+          "type": "Algorithm",
+          "overview": "A linear ordering of vertices in a Directed Acyclic Graph (DAG) such that for every directed edge u -> v, vertex u comes before v.",
+          "whyUse": "Essential for task dependency scheduling, build systems (Make/Gradle), course prerequisites, and package managers.",
+          "howItWorks": [
+            "Kahn's Algorithm: Compute in-degrees of all vertices.",
+            "Add all vertices with in-degree 0 to a queue.",
+            "Dequeue vertex, append to sorted order, and decrement in-degrees of neighbors."
+          ],
+          "example": {
+            "description": "Prerequisite order: [Calc 1] -> [Calc 2] -> [Linear Algebra].",
+            "indices": ["Order 1", "Order 2", "Order 3"],
+            "values": ["Calc 1", "Calc 2", "Linear Alg"],
+            "highlightIndex": 0
+          },
+          "operations": [
+            { "name": "In-Degree Check", "complexity": "O(1)", "description": "Detects independent nodes" }
+          ],
+          "complexity": { "time": "O(V + E)", "space": "O(V)" },
+          "pseudocode": [
+            "queue = all vertices with inDegree == 0",
+            "while not queue.isEmpty():",
+            "  u = queue.pop()",
+            "  result.push(u)",
+            "  for v in graph[u]:",
+            "    inDegree[v]--",
+            "    if inDegree[v] == 0: queue.push(v)"
+          ],
+          "keyTakeaways": [
+            "Only valid on Directed Acyclic Graphs (DAGs); detects cycles if result length < V."
+          ]
+        }
+      ]
+    },
+    {
+      "id": "recursion",
+      "title": "Recursion",
+      "icon": "recursion",
+      "exampleConcepts": ["Recursion Basics", "Call Stack", "Divide & Conquer"],
+      "concepts": [
+        {
+          "id": "recursion-basics",
+          "title": "Recursion Basics",
+          "type": "Technique",
+          "overview": "The computational methodology of formulating problem solutions in terms of simpler instances of the identical problem.",
+          "whyUse": "Simplifies mathematical formulas, tree traversals, and nested structure parsing into clean, readable code.",
+          "howItWorks": [
+            "Base Case: Stops recursion without making further recursive calls.",
+            "Recursive Step: Reduces problem instance toward base condition."
+          ],
+          "example": {
+            "description": "Countdown recursive trace: count(3) -> count(2) -> count(1) -> Boom.",
+            "indices": ["Step 3", "Step 2", "Step 1", "Base"],
+            "values": ["3", "2", "1", "'Done'"],
+            "highlightIndex": 0
+          },
+          "operations": [
+            { "name": "Base Test", "complexity": "O(1)", "description": "Guard condition evaluation" }
+          ],
+          "complexity": { "time": "O(n) linear steps", "space": "O(n) stack frames" },
+          "pseudocode": [
+            "function count(n):",
+            "  if n == 0: return",
+            "  print(n)",
+            "  count(n - 1)"
+          ],
+          "keyTakeaways": [
+            "Missing base cases result in infinite recursion and StackOverflow errors."
+          ]
+        },
+        {
+          "id": "recursive-call-stack",
+          "title": "Recursive Call Stack",
+          "type": "Concept",
+          "overview": "The internal runtime memory structure that tracks active execution frames, local variables, and return addresses during recursive calls.",
+          "whyUse": "Understanding the call stack is critical for preventing stack overflow, analyzing memory, and converting recursion to iteration.",
+          "howItWorks": [
+            "Every function invocation pushes a new stack frame containing arguments and locals.",
+            "Reaching base case stops stack expansion; returning pops frames and delivers return values."
+          ],
+          "example": {
+            "description": "Active stack frames during sum(3): sum(3) -> sum(2) -> sum(1).",
+            "indices": ["Top Frame", "Mid Frame", "Base Frame"],
+            "values": ["sum(1)=1", "sum(2)=3", "sum(3)=6"],
+            "highlightIndex": 0
+          },
+          "operations": [
+            { "name": "Frame Push", "complexity": "O(1)", "description": "Allocates activation record" },
+            { "name": "Frame Pop", "complexity": "O(1)", "description": "Frees activation record upon return" }
+          ],
+          "complexity": { "time": "O(1) push/pop", "space": "O(d) depth of deepest recursion" },
+          "pseudocode": [
+            "// Max recursion depth is constrained by platform stack limits:",
+            "function sum(n):",
+            "  if n <= 1: return n",
+            "  return n + sum(n - 1)"
+          ],
+          "keyTakeaways": [
+            "Stack memory is limited; excessive recursion depths crash the runtime."
+          ]
+        },
+        {
+          "id": "divide-and-conquer",
+          "title": "Divide & Conquer",
+          "type": "Technique",
+          "overview": "A paradigm that breaks a problem into smaller independent subproblems, solves them recursively, and combines their solutions.",
+          "whyUse": "Dramatically reduces complexity: powers Merge Sort, Quick Sort, Binary Search, and Fast Fourier Transform.",
+          "howItWorks": [
+            "Divide: Split problem into smaller instances.",
+            "Conquer: Solve subproblems recursively.",
+            "Combine: Merge subproblem solutions to solve original problem."
+          ],
+          "example": {
+            "description": "Binary divide step splitting array of 8 items into two sets of 4.",
+            "indices": ["Original (8)", "Left (4)", "Right (4)"],
+            "values": ["[0..7]", "[0..3]", "[4..7]"],
+            "highlightIndex": 0
+          },
+          "operations": [
+            { "name": "Divide", "complexity": "O(1) to O(n)", "description": "Splits problem" },
+            { "name": "Combine", "complexity": "O(n)", "description": "Integrates sub-answers" }
+          ],
+          "complexity": { "time": "Typically O(n log n)", "space": "O(log n) to O(n)" },
+          "pseudocode": [
+            "function dnc(problem):",
+            "  if problem.isBase(): return solve(problem)",
+            "  (sub1, sub2) = divide(problem)",
+            "  res1 = dnc(sub1)",
+            "  res2 = dnc(sub2)",
+            "  return combine(res1, res2)"
+          ],
+          "keyTakeaways": [
+            "Master Theorem provides closed-form asymptotic runtime analysis for divide-and-conquer recurrences."
+          ]
+        }
+      ]
+    },
+    {
+      "id": "greedy",
+      "title": "Greedy",
+      "icon": "greedy",
+      "exampleConcepts": ["Greedy Approach", "Activity Selection", "Knapsack"],
+      "concepts": [
+        {
+          "id": "greedy-approach",
+          "title": "Greedy Approach",
+          "type": "Algorithm",
+          "overview": "An algorithmic paradigm that makes the locally optimal choice at each step with the intent that these choices lead to a globally optimal solution.",
+          "whyUse": "Extremely fast and intuitive; delivers O(n log n) or O(n) solutions where dynamic programming would require O(n²).",
+          "howItWorks": [
+            "Must possess Greedy-Choice Property: global optimum can be reached via local choices.",
+            "Must possess Optimal Substructure: optimal solution contains optimal sub-solutions."
+          ],
+          "example": {
+            "description": "Greedy coin change for 36¢ using coins [25, 10, 1]: 25 + 10 + 1.",
+            "indices": ["Pick 1", "Pick 2", "Pick 3"],
+            "values": ["25¢", "10¢", "1¢"],
+            "highlightIndex": 0
+          },
+          "operations": [
+            { "name": "Select Best Local", "complexity": "O(1)", "description": "Picks maximum immediate benefit" }
+          ],
+          "complexity": { "time": "Often O(n log n) due to initial sort", "space": "O(1) in-place" },
+          "pseudocode": [
+            "sortCandidatesByGreedyCriteria()",
+            "for candidate in candidates:",
+            "  if isFeasible(candidate):",
+            "    solution.add(candidate)"
+          ],
+          "keyTakeaways": [
+            "Greedy does not work for all problems; must be mathematically proven optimal."
+          ]
+        },
+        {
+          "id": "activity-selection",
+          "title": "Activity Selection",
+          "type": "Algorithm",
+          "overview": "Classic problem of scheduling the maximum number of mutually non-overlapping activities sharing a common resource.",
+          "whyUse": "Standard conference room scheduling, CPU task allocation, and interval scheduling.",
+          "howItWorks": [
+            "Sort activities by their finish times in ascending order.",
+            "Always pick the activity that finishes earliest and does not conflict with previously picked activity."
+          ],
+          "example": {
+            "description": "Selected intervals: [1, 3], [3, 5], [6, 9].",
+            "indices": ["Act 1", "Act 2", "Act 3"],
+            "values": ["[1..3]", "[3..5]", "[6..9]"],
+            "highlightIndex": 0
+          },
+          "operations": [
+            { "name": "Sort by Finish", "complexity": "O(n log n)", "description": "Orders intervals" },
+            { "name": "Compatibility Check", "complexity": "O(1)", "description": "start >= lastEnd" }
+          ],
+          "complexity": { "time": "O(n log n)", "space": "O(1) auxiliary" },
+          "pseudocode": [
+            "sort(activities, byFinishTime)",
+            "selected = [activities[0]]",
+            "for i = 1 to n - 1:",
+            "  if activities[i].start >= selected.last.finish:",
+            "    selected.add(activities[i])"
+          ],
+          "keyTakeaways": [
+            "Sorting by earliest finish time guarantees maximum room for subsequent activities."
+          ]
+        },
+        {
+          "id": "fractional-knapsack",
+          "title": "Fractional Knapsack",
+          "type": "Algorithm",
+          "overview": "A knapsack variant where items can be divided into fractions; goal is to maximize total value within weight capacity W.",
+          "whyUse": "Optimizes continuous cargo packing, liquid mixing, and budget bandwidth allocation.",
+          "howItWorks": [
+            "Calculate value-to-weight ratio `v[i] / w[i]` for every item.",
+            "Sort items by ratio descending.",
+            "Take entire item while capacity remains; take fraction of final item to fill remaining capacity."
+          ],
+          "example": {
+            "description": "Taking items with highest value-per-kg ratio first.",
+            "indices": ["$10/kg", "$6/kg", "$2/kg (Fraction)"],
+            "values": ["Take 100%", "Take 100%", "Take 50%"],
+            "highlightIndex": 0
+          },
+          "operations": [
+            { "name": "Ratio Sorting", "complexity": "O(n log n)", "description": "Sorts items by unit value" }
+          ],
+          "complexity": { "time": "O(n log n)", "space": "O(1)" },
+          "pseudocode": [
+            "sort(items, by: value / weight, descending)",
+            "for item in items:",
+            "  if capacity >= item.weight:",
+            "    takeWhole(item)",
+            "  else:",
+            "    takeFraction(item, capacity / item.weight)",
+            "    break"
+          ],
+          "keyTakeaways": [
+            "Solvable greedily because items are divisible. 0/1 knapsack requires Dynamic Programming."
+          ]
+        }
+      ]
+    },
+    {
+      "id": "dynamic-programming",
+      "title": "Dynamic Programming",
+      "icon": "dp",
+      "exampleConcepts": ["Memoization", "Tabulation", "0/1 Knapsack"],
+      "concepts": [
+        {
+          "id": "dp-intro",
+          "title": "DP Introduction",
+          "type": "Concept",
+          "overview": "A problem-solving method that solves complex problems by breaking them down into overlapping subproblems and storing subproblem results to avoid redundant calculations.",
+          "whyUse": "Converts exponential O(2ⁿ) brute-force recursive algorithms into polynomial O(n) or O(n²) runtimes.",
+          "howItWorks": [
+            "Requires Overlapping Subproblems: subproblems are computed repeatedly.",
+            "Requires Optimal Substructure: optimal solution derived from optimal sub-solutions.",
+            "Implemented via Top-Down (Memoization) or Bottom-Up (Tabulation)."
+          ],
+          "example": {
+            "description": "Fibonacci: fib(5) reuses fib(3) and fib(2) without recomputing.",
+            "indices": ["fib(1)", "fib(2)", "fib(3)", "fib(4)", "fib(5)"],
+            "values": [1, 1, 2, 3, 5],
+            "highlightIndex": 4
+          },
+          "operations": [
+            { "name": "State Lookup", "complexity": "O(1)", "description": "Retrieves cached subproblem" },
+            { "name": "State Store", "complexity": "O(1)", "description": "Writes subproblem solution" }
+          ],
+          "complexity": { "time": "O(States × Transition)", "space": "O(States) table" },
+          "pseudocode": [
+            "// Fibonacci bottom-up DP:",
+            "dp[0] = 0, dp[1] = 1",
+            "for i = 2 to n:",
+            "  dp[i] = dp[i - 1] + dp[i - 2]"
+          ],
+          "keyTakeaways": [
+            "Identify the state variables and formulate the recurrence relation.",
+            "Remember: 'Careful brute force + remembering answers = Dynamic Programming'."
+          ]
+        },
+        {
+          "id": "memoization",
+          "title": "Memoization",
+          "type": "Technique",
+          "overview": "Top-Down dynamic programming strategy that maintains recursive structure while caching function outputs based on input parameter keys.",
+          "whyUse": "Natural translation from recursive formulation; only computes subproblems that are actually needed.",
+          "howItWorks": [
+            "Check cache table before computing.",
+            "If key exists, return cached result immediately.",
+            "Compute answer recursively, store in cache, and return."
+          ],
+          "example": {
+            "description": "Memo table caching fib(3) = 2 for subsequent calls.",
+            "indices": ["Memo[1]", "Memo[2]", "Memo[3]"],
+            "values": [1, 1, 2],
+            "highlightIndex": 2
+          },
+          "operations": [
+            { "name": "Cache Check", "complexity": "O(1)", "description": "Checks if state is solved" }
+          ],
+          "complexity": { "time": "O(n) subproblems", "space": "O(n) cache + recursion stack" },
+          "pseudocode": [
+            "memo = {}",
+            "function solve(n):",
+            "  if n in memo: return memo[n]",
+            "  if n <= 1: return n",
+            "  memo[n] = solve(n - 1) + solve(n - 2)",
+            "  return memo[n]"
+          ],
+          "keyTakeaways": [
+            "Preserves intuitive top-down thought process.",
+            "Subject to recursion stack limits."
+          ]
+        },
+        {
+          "id": "tabulation",
+          "title": "Tabulation",
+          "type": "Technique",
+          "overview": "Bottom-Up dynamic programming that iteratively fills an array or table starting from base cases up to the desired target state.",
+          "whyUse": "Eliminates call-stack overhead and allows space optimization (e.g. keeping only the last 2 states).",
+          "howItWorks": [
+            "Initialize table with known base cases.",
+            "Use nested loops to iteratively populate subsequent entries according to recurrence relations."
+          ],
+          "example": {
+            "description": "Filling 1D DP table sequentially from left to right.",
+            "indices": ["dp[0]", "dp[1]", "dp[2]", "dp[3]"],
+            "values": [0, 1, 1, 2],
+            "highlightIndex": 3
+          },
+          "operations": [
+            { "name": "Table Fill", "complexity": "O(1) per entry", "description": "Iterative transition" }
+          ],
+          "complexity": { "time": "O(n)", "space": "O(n) table, reducible to O(1)" },
+          "pseudocode": [
+            "dp = array of size n + 1",
+            "dp[0] = 0, dp[1] = 1",
+            "for i = 2 to n:",
+            "  dp[i] = dp[i-1] + dp[i-2]"
+          ],
+          "keyTakeaways": [
+            "No recursion stack depth concerns.",
+            "Can often reduce memory from O(n) to O(1) by retaining only previous row/cells."
+          ]
+        },
+        {
+          "id": "0-1-knapsack",
+          "title": "0/1 Knapsack",
+          "type": "Algorithm",
+          "overview": "Given items with specific weights and values, determine the maximum value achievable within a knapsack capacity W where each item is either taken (1) or left (0).",
+          "whyUse": "Classic resource allocation model for budgets, project selections, and hardware constraints.",
+          "howItWorks": [
+            "State: `dp[i][w]` is max value using first i items with remaining capacity w.",
+            "Choice: Either exclude item `dp[i-1][w]` or include item `val[i] + dp[i-1][w - wt[i]]`.",
+            "Take the maximum of both choices."
+          ],
+          "example": {
+            "description": "2D DP table: rows are items, columns are capacities 0..W.",
+            "indices": ["Cap 0", "Cap 1", "Cap 2", "Cap 3"],
+            "values": ["$0", "$3", "$7", "$10"],
+            "highlightIndex": 3
+          },
+          "operations": [
+            { "name": "Include/Exclude Decision", "complexity": "O(1)", "description": "Takes max of two alternatives" }
+          ],
+          "complexity": { "time": "O(n × W) pseudo-polynomial", "space": "O(n × W), optimizable to O(W)" },
+          "pseudocode": [
+            "for i = 1 to n:",
+            "  for w = 1 to W:",
+            "    if wt[i-1] <= w:",
+            "      dp[i][w] = max(dp[i-1][w], val[i-1] + dp[i-1][w - wt[i-1]])",
+            "    else:",
+            "      dp[i][w] = dp[i-1][w]"
+          ],
+          "keyTakeaways": [
+            "Pseudo-polynomial time depends on capacity numeric magnitude W.",
+            "Space can be optimized to a single 1D array by iterating capacities backwards."
+          ]
+        },
+        {
+          "id": "longest-common-subsequence",
+          "title": "Longest Common Subsequence",
+          "type": "Algorithm",
+          "overview": "Finds the longest subsequence present in both strings in the same relative order (not necessarily contiguous).",
+          "whyUse": "Powers file diff tools (git diff), DNA genomic alignment, and plagiarism detection.",
+          "howItWorks": [
+            "If characters match (`s1[i] == s2[j]`), `dp[i][j] = 1 + dp[i-1][j-1]`.",
+            "If characters differ, `dp[i][j] = max(dp[i-1][j], dp[i][j-1])`."
+          ],
+          "example": {
+            "description": "LCS of 'ABCDE' and 'ACE' is 'ACE' (length 3).",
+            "indices": ["Match 'A'", "Match 'C'", "Match 'E'"],
+            "values": ["Len 1", "Len 2", "Len 3"],
+            "highlightIndex": 2
+          },
+          "operations": [
+            { "name": "Character Match", "complexity": "O(1)", "description": "Extends diagonal subsequence" },
+            { "name": "Mismatch Branch", "complexity": "O(1)", "description": "Max of left or top cell" }
+          ],
+          "complexity": { "time": "O(n × m)", "space": "O(n × m)" },
+          "pseudocode": [
+            "for i = 1 to m:",
+            "  for j = 1 to n:",
+            "    if s1[i-1] == s2[j-1]:",
+            "      dp[i][j] = 1 + dp[i-1][j-1]",
+            "    else:",
+            "      dp[i][j] = max(dp[i-1][j], dp[i][j-1])"
+          ],
+          "keyTakeaways": [
+            "2D grid dynamic programming pattern tracking prefix alignments."
+          ]
+        }
+      ]
+    },
+    {
+      "id": "backtracking",
+      "title": "Backtracking",
+      "icon": "backtracking",
+      "exampleConcepts": ["N-Queens", "Subsets", "Permutations"],
+      "concepts": [
+        {
+          "id": "backtracking-intro",
+          "title": "Backtracking",
+          "type": "Technique",
+          "overview": "A refined brute-force technique that incrementally builds candidates to solutions and abandons ('backtracks') a candidate as soon as it determines it cannot possibly lead to a valid solution.",
+          "whyUse": "Solves constraint satisfaction problems, Sudoku solvers, combinatorial permutations, and puzzle games.",
+          "howItWorks": [
+            "Choose: Make a tentative choice and add to current candidate state.",
+            "Explore: Recursively check if this choice leads to a full solution.",
+            "Unchoose (Backtrack): Revert choice to restore state before trying next alternative."
+          ],
+          "example": {
+            "description": "Decision tree pruning when candidate violates constraint.",
+            "indices": ["Choice A", "Violates (Prune)", "Choice B (Valid)"],
+            "values": ["Try Path", "Backtrack", "Proceed"],
+            "highlightIndex": 2
+          },
+          "operations": [
+            { "name": "Make Choice", "complexity": "O(1)", "description": "Adds element to path" },
+            { "name": "Undo Choice", "complexity": "O(1)", "description": "Pops element to backtrack" }
+          ],
+          "complexity": { "time": "Exponential O(bᵈ) where b is branching factor", "space": "O(d) recursion tree depth" },
+          "pseudocode": [
+            "function backtrack(state):",
+            "  if isSolution(state):",
+            "    record(state); return",
+            "  for choice in choices:",
+            "    if isValid(choice, state):",
+            "      state.add(choice)      // Choose",
+            "      backtrack(state)       // Explore",
+            "      state.remove(choice)   // Unchoose"
+          ],
+          "keyTakeaways": [
+            "Pruning early eliminates vast branches of the decision tree.",
+            "Always undo state changes to maintain clean state for sibling branches."
+          ]
+        },
+        {
+          "id": "n-queens",
+          "title": "N-Queens",
+          "type": "Algorithm",
+          "overview": "The classic puzzle of placing N chess queens on an N×N chessboard such that no two queens threaten each other.",
+          "whyUse": "The quintessential benchmark for backtracking and constraint satisfaction.",
+          "howItWorks": [
+            "Place queens row by row.",
+            "For each column in current row, check if position conflicts with existing queens (column, diagonals).",
+            "If safe, place queen and recurse to next row. If no column works, backtrack to previous row."
+          ],
+          "example": {
+            "description": "4-Queens safe placement: Q placed at [row 0, col 1].",
+            "indices": ["Row 0", "Row 1", "Row 2", "Row 3"],
+            "values": ["Q at col 1", "Q at col 3", "Q at col 0", "Q at col 2"],
+            "highlightIndex": 0
+          },
+          "operations": [
+            { "name": "Safety Check", "complexity": "O(1) with hash sets", "description": "Checks columns and diagonals" }
+          ],
+          "complexity": { "time": "O(N!)", "space": "O(N) board state" },
+          "pseudocode": [
+            "function placeQueen(row):",
+            "  if row == N: recordBoard(); return",
+            "  for col = 0 to N - 1:",
+            "    if isSafe(row, col):",
+            "      board[row] = col",
+            "      placeQueen(row + 1)",
+            "      board[row] = -1 // backtrack"
+          ],
+          "keyTakeaways": [
+            "Diagonal indexing trick: `row - col` and `row + col` uniquely identify diagonals in O(1)."
+          ]
+        },
+        {
+          "id": "subsets",
+          "title": "Subsets",
+          "type": "Algorithm",
+          "overview": "Generates the power set (all 2ⁿ subsets) of a given collection of elements.",
+          "whyUse": "Used in combinatorial generation, feature selection, and knapsack brute-force baselines.",
+          "howItWorks": [
+            "At each element index, make a binary choice: either include the element or exclude it.",
+            "Recurse through all elements to generate leaf states representing subsets."
+          ],
+          "example": {
+            "description": "Subsets of [1, 2]: [], [1], [2], [1, 2].",
+            "indices": ["Subset 1", "Subset 2", "Subset 3", "Subset 4"],
+            "values": ["[]", "[1]", "[2]", "[1, 2]"],
+            "highlightIndex": 3
+          },
+          "operations": [
+            { "name": "Include", "complexity": "O(1)", "description": "Appends item to current subset" },
+            { "name": "Exclude", "complexity": "O(1)", "description": "Skips item and advances" }
+          ],
+          "complexity": { "time": "O(n × 2ⁿ)", "space": "O(n) recursive depth" },
+          "pseudocode": [
+            "function generateSubsets(index, current):",
+            "  result.add(copy(current))",
+            "  for i = index to n - 1:",
+            "    current.add(nums[i])",
+            "    generateSubsets(i + 1, current)",
+            "    current.removeLast()"
+          ],
+          "keyTakeaways": [
+            "Total number of subsets for n items is exactly 2ⁿ."
+          ]
+        },
+        {
+          "id": "permutations",
+          "title": "Permutations",
+          "type": "Algorithm",
+          "overview": "Generates all n! possible reorderings of a collection of distinct elements.",
+          "whyUse": "Essential for Traveling Salesperson brute force, arrangement puzzles, and cryptarithmetic solvers.",
+          "howItWorks": [
+            "Maintain current permutation and a boolean visited array (or in-place swap).",
+            "Pick each unused element, append to permutation, and recurse.",
+            "Backtrack by removing element and marking unused."
+          ],
+          "example": {
+            "description": "Permutations of [1, 2, 3]: 6 total arrangements.",
+            "indices": ["P1", "P2", "P3", "P4", "P5", "P6"],
+            "values": ["[1,2,3]", "[1,3,2]", "[2,1,3]", "[2,3,1]", "[3,1,2]", "[3,2,1]"],
+            "highlightIndex": 0
+          },
+          "operations": [
+            { "name": "Element Swap", "complexity": "O(1)", "description": "In-place candidate mutation" }
+          ],
+          "complexity": { "time": "O(n × n!)", "space": "O(n) call stack" },
+          "pseudocode": [
+            "function permute(start):",
+            "  if start == n: result.add(copy(nums)); return",
+            "  for i = start to n - 1:",
+            "    swap(nums[start], nums[i])",
+            "    permute(start + 1)",
+            "    swap(nums[start], nums[i]) // backtrack"
+          ],
+          "keyTakeaways": [
+            "Factorial complexity O(n!) grows very rapidly (10! = 3.6 million)."
+          ]
+        }
+      ]
+    }
+  ]
+}

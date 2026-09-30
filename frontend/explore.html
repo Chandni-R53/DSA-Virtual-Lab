@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Explore DSA — DSA Virtual Lab</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/style.css">
+<link rel="stylesheet" href="css/explore.css">
+</head>
+<body>
+
+<a class="skip-link" href="#main">Skip to content</a>
+
+<!-- NAVBAR (same structure/classes as Home, so it inherits the shared look) -->
+<header class="navbar" id="navbar">
+  <div class="navbar-inner">
+    <a href="index.html" class="brand">
+      <span class="brand-mark" aria-hidden="true">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none"><path d="M12 3L22 20H2L12 3Z" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/></svg>
+      </span>
+      <span>DSA Virtual Lab</span>
+    </a>
+
+    <nav class="nav-links" id="navLinks">
+      <a href="explore.html" class="active">Explore DSA</a>
+      <a href="index.html#virtual-lab">Virtual Lab</a>
+      <a href="index.html#how-it-helps">Practice</a>
+    </nav>
+
+    <div class="navbar-actions" data-authed="false">
+      <a href="#" class="btn btn-outline btn-compact">Log in</a>
+      <a href="#" class="btn btn-primary btn-compact">Get Started</a>
+    </div>
+
+    <button class="nav-toggle" id="navToggle" aria-label="Toggle menu" aria-expanded="false">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</header>
+
+<main id="main">
+
+  <!-- STATE 1: EXPLORE LANDING -->
+  <section class="explore-landing" id="exploreLanding">
+    <div class="section-inner">
+      <div class="landing-hero">
+        <span class="pill">Structured Curriculum</span>
+        <h1 class="explore-title">Explore <span class="ink-lime">DSA Topics</span></h1>
+        <p class="explore-sub">Discover foundational data structures, algorithms, and problem-solving patterns — pick a topic and dive into the concepts.</p>
+
+        <div class="explore-search-wrap">
+          <div class="explore-search">
+            <span class="search-icon" aria-hidden="true">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
+            </span>
+            <input type="search" id="landingSearch" placeholder="Search topics, algorithms, or techniques..." autocomplete="off">
+            <button class="search-clear-btn" id="landingSearchClear" type="button" aria-label="Clear search" hidden>×</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="topic-grid-header">
+        <div class="topic-grid-heading">
+          <h2>Core Categories</h2>
+        </div>
+        <button class="view-all-topics-btn" id="viewAllTopicsBtn" type="button">
+          <span id="viewAllTopicsLabel">View All Topics</span> <span class="btn-arrow" aria-hidden="true">→</span>
+        </button>
+      </div>
+
+      <div class="topic-grid" id="topicGrid">
+        <!-- topic/category cards injected by explore.js -->
+      </div>
+    </div>
+  </section>
+
+  <!-- STATE 2: CONCEPT VIEW -->
+  <section class="concept-view" id="conceptView" hidden>
+    <div class="section-inner concept-inner">
+
+      <div class="concept-top-bar">
+        <button class="back-link" id="backToTopics" type="button">
+          <span class="back-arrow" aria-hidden="true">←</span> Back to All Topics
+        </button>
+      </div>
+
+      <div class="workspace">
+
+        <!-- LEFT: sidebar (independently scrollable) -->
+        <aside class="sidebar" id="sidebar" aria-label="DSA Curriculum Topics">
+          <div class="sidebar-head">
+            <div class="sidebar-title-row">
+              <h2>DSA Concepts</h2>
+            </div>
+            <div class="sidebar-search">
+              <span class="search-icon" aria-hidden="true">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
+              </span>
+              <input type="search" id="sidebarSearch" placeholder="Filter concepts..." autocomplete="off">
+              <button class="sidebar-search-clear" id="sidebarSearchClear" type="button" aria-label="Clear filter" hidden>×</button>
+            </div>
+          </div>
+          <nav class="sidebar-nav" id="sidebarNav">
+            <!-- category groups + concept links injected by explore.js -->
+          </nav>
+        </aside>
+
+        <!-- Mobile drawer toggle -->
+        <button class="sidebar-toggle" id="sidebarToggle" aria-expanded="false" type="button">
+          <span id="sidebarToggleLabel">Topic Navigation</span> <span class="toggle-icon">▾</span>
+        </button>
+
+        <!-- RIGHT: concept content -->
+        <article class="concept-content" id="conceptContent">
+          <!-- rendered by explore.js -->
+        </article>
+
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<!-- FOOTER (same structure as Home) -->
+<footer class="footer">
+  <div class="section-inner footer-inner">
+    <div class="footer-brand">
+      <span class="brand">
+        <span class="brand-mark" aria-hidden="true">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M12 3L22 20H2L12 3Z" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/></svg>
+        </span>
+        DSA Virtual Lab
+      </span>
+      <p>An interactive environment for learning Data Structures and Algorithms through visualization, practice, and experimentation.</p>
+      <div class="social-row">
+        <a href="#" class="social-btn" aria-label="GitHub">⌥</a>
+        <a href="#" class="social-btn" aria-label="LinkedIn">in</a>
+        <a href="#" class="social-btn" aria-label="Email">✉</a>
+      </div>
+    </div>
+
+    <div class="footer-col">
+      <h4>Explore</h4>
+      <a href="explore.html">Explore DSA</a>
+      <a href="index.html#virtual-lab">Virtual Lab</a>
+      <a href="index.html#how-it-helps">Practice</a>
+    </div>
+
+    <div class="footer-col">
+      <h4>Resources</h4>
+      <a href="#">Algorithms</a>
+      <a href="#">Data Structures</a>
+      <a href="#">Learning Guide</a>
+    </div>
+
+    <div class="footer-col">
+      <h4>Project</h4>
+      <a href="#">About</a>
+      <a href="#">GitHub</a>
+      <a href="#">Contact</a>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <span>© 2026 DSA Virtual Lab. Built for students who want to understand, not memorize.</span>
+    <span class="footer-legal"><a href="#">Privacy Policy</a> | <a href="#">Terms of Use</a></span>
+  </div>
+</footer>
+
+<script src="js/script.js"></script>
+<script src="js/explore.js"></script>
+</body>
+</html>

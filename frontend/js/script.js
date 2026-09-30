@@ -61,16 +61,18 @@ function stop() {
   playBtn.innerHTML = "▶ Pause".replace("Pause", "Play");
 }
 
-if (nextBtn) nextBtn.addEventListener("click", () => goTo(current + 1));
-if (prevBtn) prevBtn.addEventListener("click", () => goTo(current - 1));
-if (resetBtn) resetBtn.addEventListener("click", () => { stop(); goTo(0); });
+if (arrayEl && msgEl) {
+  if (nextBtn) nextBtn.addEventListener("click", () => goTo(current + 1));
+  if (prevBtn) prevBtn.addEventListener("click", () => goTo(current - 1));
+  if (resetBtn) resetBtn.addEventListener("click", () => { stop(); goTo(0); });
 
-if (playBtn) {
-  playBtn.addEventListener("click", () => {
-    if (timer) { stop(); return; }
-    playBtn.textContent = "❚❚ Pause";
-    timer = setInterval(() => goTo(current + 1), 1600);
-  });
+  if (playBtn) {
+    playBtn.addEventListener("click", () => {
+      if (timer) { stop(); return; }
+      playBtn.textContent = "❚❚ Pause";
+      timer = setInterval(() => goTo(current + 1), 1600);
+    });
+  }
+
+  render(current);
 }
-
-render(current);
