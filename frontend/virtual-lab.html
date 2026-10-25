@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Virtual Lab — DSA Virtual Lab</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/style.css">
+<link rel="stylesheet" href="css/virtual-lab.css">
+</head>
+<body>
+
+<a class="skip-link" href="#main">Skip to content</a>
+
+<!-- NAVBAR (same structure/classes as Home and Explore) -->
+<header class="navbar" id="navbar">
+  <div class="navbar-inner">
+    <a href="index.html" class="brand">
+      <span class="brand-mark" aria-hidden="true">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none"><path d="M12 3L22 20H2L12 3Z" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/></svg>
+      </span>
+      <span>DSA Virtual Lab</span>
+    </a>
+
+    <nav class="nav-links" id="navLinks">
+      <a href="explore.html">Explore DSA</a>
+      <a href="virtual-lab.html" class="active">Virtual Lab</a>
+      <a href="index.html#how-it-helps">Practice</a>
+    </nav>
+
+    <div class="navbar-actions" data-authed="false">
+      <a href="#" class="btn btn-outline btn-compact">Log in</a>
+      <a href="#" class="btn btn-primary btn-compact">Get Started</a>
+    </div>
+
+    <button class="nav-toggle" id="navToggle" aria-label="Toggle menu" aria-expanded="false">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</header>
+
+<main id="main" class="vl-page">
+  <div class="section-inner">
+
+    <!-- HERO -->
+    <section class="vl-hero">
+      <span class="pill">Interactive Visualizations</span>
+      <h1 class="vl-title">Virtual <span class="ink-lime">Lab</span></h1>
+      <p class="vl-sub">Confused by an algorithm? Let's visualize every step and turn complex logic into clear understanding.</p>
+
+      <div class="vl-search">
+        <span class="vl-search-icon" aria-hidden="true">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
+        </span>
+        <input type="search" id="vlSearch" aria-label="Search visualizations" placeholder="Search visualizations, e.g. Binary Search, BFS..." autocomplete="off">
+        <!-- ONE custom clear button; the browser's native one is hidden in CSS. Only shown while typing. -->
+        <button class="vl-search-clear" id="vlSearchClear" type="button" aria-label="Clear search" hidden>×</button>
+      </div>
+    </section>
+
+    <!-- CATEGORY PILLS (injected by virtual-lab.js) -->
+    <nav class="vl-cats" id="vlCats" aria-label="Topics"></nav>
+
+    <!-- CARDS FOR THE SELECTED CATEGORY (or search results) -->
+    <section class="vl-results" id="vlResults" aria-live="polite">
+      <div class="vl-results-head">
+        <h2 id="vlHeading"></h2>
+      </div>
+      <div class="vl-grid" id="vlGrid"></div>
+      <div class="vl-empty" id="vlEmpty" hidden>
+        <p>No visualizations match “<span id="vlEmptyQuery"></span>”.</p>
+        <button type="button" class="vl-empty-btn" id="vlEmptyReset">Show all topics</button>
+      </div>
+    </section>
+
+  </div>
+</main>
+
+<!-- FOOTER (same structure as Home / Explore) -->
+<footer class="footer">
+  <div class="section-inner footer-inner">
+    <div class="footer-brand">
+      <span class="brand">
+        <span class="brand-mark" aria-hidden="true">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M12 3L22 20H2L12 3Z" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/></svg>
+        </span>
+        DSA Virtual Lab
+      </span>
+      <p>An interactive environment for learning Data Structures and Algorithms through visualization, practice, and experimentation.</p>
+      <div class="social-row">
+        <a href="#" class="social-btn" aria-label="GitHub">⌥</a>
+        <a href="#" class="social-btn" aria-label="LinkedIn">in</a>
+        <a href="#" class="social-btn" aria-label="Email">✉</a>
+      </div>
+    </div>
+    <div class="footer-col">
+      <h4>Explore</h4>
+      <a href="explore.html">Explore DSA</a>
+      <a href="virtual-lab.html">Virtual Lab</a>
+      <a href="index.html#how-it-helps">Practice</a>
+    </div>
+    <div class="footer-col">
+      <h4>Resources</h4>
+      <a href="#">Algorithms</a>
+      <a href="#">Data Structures</a>
+      <a href="#">Learning Guide</a>
+    </div>
+    <div class="footer-col">
+      <h4>Project</h4>
+      <a href="#">About</a>
+      <a href="#">GitHub</a>
+      <a href="#">Contact</a>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <span>© 2026 DSA Virtual Lab. Built for students who want to understand, not memorize.</span>
+    <span class="footer-legal"><a href="#">Privacy Policy</a> | <a href="#">Terms of Use</a></span>
+  </div>
+</footer>
+
+<script src="js/script.js"></script>
+<script src="js/virtual-lab.js"></script>
+</body>
+</html>

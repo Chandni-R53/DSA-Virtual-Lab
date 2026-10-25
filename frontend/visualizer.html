@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Visualizer — DSA Virtual Lab</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/style.css">
+<link rel="stylesheet" href="css/virtual-lab.css">
+</head>
+<body>
+<!-- TEMPORARY PLACEHOLDER: the real visualizer is not built yet.
+     Cards on virtual-lab.html link here as visualizer.html?topic=<category-id>&sub=<subtopic-id>.
+     Later, replace this page's content (or point the links at real pages) using those two values. -->
+<header class="navbar" id="navbar">
+  <div class="navbar-inner">
+    <a href="index.html" class="brand">
+      <span class="brand-mark" aria-hidden="true"><svg width="22" height="22" viewBox="0 0 24 24" fill="none"><path d="M12 3L22 20H2L12 3Z" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/></svg></span>
+      <span>DSA Virtual Lab</span>
+    </a>
+    <nav class="nav-links" id="navLinks">
+      <a href="explore.html">Explore DSA</a>
+      <a href="virtual-lab.html" class="active">Virtual Lab</a>
+      <a href="index.html#how-it-helps">Practice</a>
+    </nav>
+    <div class="navbar-actions" data-authed="false">
+      <a href="#" class="btn btn-outline btn-compact">Log in</a>
+      <a href="#" class="btn btn-primary btn-compact">Get Started</a>
+    </div>
+    <button class="nav-toggle" id="navToggle" aria-label="Toggle menu" aria-expanded="false"><span></span><span></span><span></span></button>
+  </div>
+</header>
+
+<main class="vl-page">
+  <div class="section-inner vl-placeholder">
+    <span class="pill">Coming soon</span>
+    <h1 class="vl-title" id="phTitle">Visualizer</h1>
+    <p class="vl-sub">This visualization hasn't been built yet. The card you clicked is wired up and ready to connect.</p>
+    <p class="vl-ph-meta">topic: <code id="phTopic">–</code> &nbsp;·&nbsp; sub: <code id="phSub">–</code></p>
+    <a class="btn btn-primary" href="virtual-lab.html">← Back to Virtual Lab</a>
+  </div>
+</main>
+
+<script src="js/script.js"></script>
+<script>
+  // Read ?topic=...&sub=... and show them (placeholder only)
+  var p = new URLSearchParams(location.search);
+  var sub = p.get('sub') || '';
+  document.getElementById('phTopic').textContent = p.get('topic') || '–';
+  document.getElementById('phSub').textContent = sub || '–';
+  if (sub) document.getElementById('phTitle').textContent = sub.replace(/-/g, ' ').replace(/\b\w/g, function (c) { return c.toUpperCase(); });
+</script>
+</body>
+</html>

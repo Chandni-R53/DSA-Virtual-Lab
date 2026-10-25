@@ -1,0 +1,105 @@
+{
+  "id": "arrays",
+  "title": "Arrays",
+  "type": "Data Structure",
+  "overview": "An array is a data structure used to store multiple elements of the same data type in a sequence of memory locations that are next to each other, called contiguous memory.\n\nContiguous memory means that the elements are stored one after another in memory, rather than being scattered across different locations.\n\nExample:\nArray: [10] [20] [30] [40] [50]\nIndex:   0    1    2    3    4\n\nHere, 10, 20, 30, 40, and 50 are the elements, while 0 to 4 are their indexes.\n\nThe index usually starts from 0, and it helps us identify and directly access an element by its position.",
+  "whyUse": "Imagine we need to store 100 marks.\n\nWithout an array, we would need separate variables:\nmark1, mark2, mark3, mark4, ... mark100\n\nManaging so many variables would become difficult.\n\nAn array allows us to store all these related values under one name, while accessing each value using its index:\nmarks[0]\nmarks[1]\nmarks[2]\n\nThis makes it much easier to store, access, and manage a collection of related values.",
+  "types": {
+    "intro": "Arrays can be classified based on size and dimensions.",
+    "groups": [
+      {
+        "title": "Based on Size",
+        "items": [
+          {
+            "name": "Fixed-size Array",
+            "description": "The size is decided when the array is created and generally cannot be changed during its lifetime."
+          },
+          {
+            "name": "Dynamic Array",
+            "description": "A dynamic array can grow or shrink as elements are added or removed, depending on the programming language and implementation. Examples include C++ vector and Python list, which provide dynamic-array-like behavior."
+          }
+        ]
+      },
+      {
+        "title": "Based on Dimensions",
+        "items": [
+          {
+            "name": "1D Array",
+            "description": "A one-dimensional array stores elements in a single sequence.\n\nExample:\n[10] [20] [30] [40]\n\nIt can be thought of like a simple list of values."
+          },
+          {
+            "name": "2D Array",
+            "description": "A two-dimensional array organizes elements into rows and columns, similar to a table or matrix.\n\nExample:\n[10] [20] [30]\n[40] [50] [60]\n\nAn element is accessed using two indexes — one for the row and one for the column."
+          },
+          {
+            "name": "Multidimensional Array",
+            "description": "An array can have more than two dimensions, such as a 3D array. These can be imagined as multiple 2D tables arranged together and are useful for representing data with multiple dimensions."
+          }
+        ]
+      }
+    ]
+  },
+  "howItWorks": [
+    "Array elements are stored next to each other in memory. Because their locations follow a predictable order, we can calculate where a particular element is stored.",
+    "Suppose:\nArray: [10] [20] [30] [40] [50]\nIndex:   0    1    2    3    4",
+    "If we want to access arr[3], the system uses:\n- the starting memory location of the array\n- the index of the required element\n- the size of each element\n\nto calculate the memory location of arr[3].",
+    "It then goes directly to that location and retrieves the value.",
+    "Example:\narr[3]\n↓\nCalculate location\n↓\nGo directly to that memory location\n↓\nGet 40",
+    "So, arr[3] gives us 40 through direct index-based access.",
+    "This is why accessing an element by index takes O(1) time."
+  ],
+  "example": {
+    "indices": [0, 1, 2, 3, 4],
+    "values": [10, 20, 30, 40, 50],
+    "highlightIndex": 3
+  },
+  "operations": [
+    {
+      "name": "Access",
+      "complexity": "O(1)",
+      "description": "Getting an element using its index.\n\nExample:\narr[2] → 30\n\nDirect index access takes O(1) time."
+    },
+    {
+      "name": "Traversal",
+      "complexity": "O(n)",
+      "description": "Visiting each element one by one, usually to print, check, or process every element."
+    },
+    {
+      "name": "Insertion",
+      "complexity": "O(n)",
+      "description": "Adding a new element. When inserting in the middle, existing elements may need to be shifted.\n\nExample:\nBefore: [10] [20] [30] [40]\nAfter:  [10] [20] [25] [30] [40]"
+    },
+    {
+      "name": "Deletion",
+      "complexity": "O(n)",
+      "description": "Removing an element. When an element is deleted, following elements may need to be shifted left.\n\nExample:\nBefore: [10] [20] [30] [40]\nAfter:  [10] [30] [40]"
+    },
+    {
+      "name": "Searching",
+      "complexity": "O(n)",
+      "description": "Finding a particular value or its position.\nAn unsorted array can use Linear Search, while a sorted array can use Binary Search."
+    },
+    {
+      "name": "Updating",
+      "complexity": "O(1)",
+      "description": "Changing an existing element using its index.\n\nExample:\nBefore: [10] [20] [30] [40]\nUpdate index 2\nAfter:  [10] [20] [35] [40]"
+    }
+  ],
+  "complexity": {
+    "time": "Access — O(1), Update — O(1), Traversal — O(n), Linear Search — O(n), Insertion — O(n), Deletion — O(n)",
+    "space": "Storing n elements — O(n) space",
+    "notes": [
+      "Access and update are O(1) because an element can be reached directly using its index.",
+      "Traversal and linear search can require visiting every element.",
+      "Insertion and deletion can take O(n) when elements need to be shifted."
+    ]
+  },
+  "pseudocode": [],
+  "keyTakeaways": [
+    "Arrays store multiple elements of the same data type in contiguous memory.",
+    "Elements are accessed using an index, usually starting from 0.",
+    "Arrays are useful when fast access by position is important.",
+    "Insertion and deletion can be slower because elements may need to shift.",
+    "Arrays are a foundation for many DSA techniques such as searching, sorting, prefix sums, two pointers, and sliding window."
+  ]
+}

@@ -1,0 +1,54 @@
+{
+  "id": "sliding-window",
+  "title": "Sliding Window",
+  "type": "Technique",
+  "overview": "Sliding Window is a problem-solving technique used to process a continuous range of elements in an array or string.\n\nInstead of repeatedly calculating or checking the same elements, we maintain a window over a portion of the data and move it as needed.\n\nFor example:\n\nArray:   [1] [2] [3] [4] [5] [6]\n          └─────────┘\n           Window 1\n\nArray:   [1] [2] [3] [4] [5] [6]\n              └─────────┘\n               Window 2\n\nArray:   [1] [2] [3] [4] [5] [6]\n                  └─────────┘\n                   Window 3\n\nFor a window size of 3:\n\nWindow 1 → [1] [2] [3]\nWindow 2 →     [2] [3] [4]\nWindow 3 →         [3] [4] [5]\nWindow 4 →             [4] [5] [6]\n\nThe window represents a continuous part of the array or string.",
+  "whyUse": "Many problems ask us to find something about continuous elements, such as:\n\nMaximum sum of a subarray of size k\nMinimum or maximum value within a range\nLongest substring satisfying a condition\n\nA straightforward solution may repeatedly process the same elements.\n\nSliding Window avoids much of this repeated work by adding elements when the window expands and removing elements when it moves forward.",
+  "howItWorks": [
+    "There are two common types of sliding windows.",
+    "Fixed-Size Window\n\nThe window always contains the same number of elements.\n\nFor example, for a window size of 3:\n\nArray:   [1] [2] [3] [4] [5]\n          └─────────┘\n           Window\n\nWhen the window moves one position:\n\nArray:   [1] [2] [3] [4] [5]\n              └─────────┘\n               Window\n\nOne element leaves the window and one new element enters.\n\nThis is useful for problems such as finding the maximum sum of k consecutive elements.",
+    "Variable-Size Window\n\nThe size of the window can grow or shrink depending on a condition.\n\nFor example:\n\nArray:   [1] [2] [3] [4] [5]\n          ↑           ↑\n        left        right\n\nThe right pointer expands the window.\n\nIf the current window no longer satisfies the required condition, left moves forward to shrink it.\n\nThis is commonly used for problems involving longest or shortest valid subarrays or substrings."
+  ],
+  "example": {
+    "indices": [
+      0,
+      1,
+      2,
+      3,
+      4,
+      5
+    ],
+    "values": [
+      1,
+      2,
+      3,
+      4,
+      5,
+      6
+    ]
+  },
+  "patterns": [
+    {
+      "title": "Common Sliding Window Pattern",
+      "description": "A typical sliding window uses two boundaries:\n\nleft  → beginning of the window\nright → end of the window\n\nThe general idea is:\n\nExpand window\n      ↓\nCheck condition\n      ↓\nCondition satisfied?\n   ↙          ↘\n Yes           No\n  ↓             ↓\nUpdate answer   Shrink window\n                ↓\n             Continue\n\nFor example, when looking for the longest valid substring:\n\nString:  A  B  C  D  E\n         ↑        ↑\n       left      right\n\nWe expand right while the window remains valid.\n\nWhen the condition becomes invalid, we move left forward until the window becomes valid again."
+    }
+  ],
+  "operations": [],
+  "complexity": {
+    "time": "O(n)",
+    "space": "O(1) or O(n)",
+    "notes": [
+      "Sliding Window can often reduce a solution from O(n²) to O(n) because each element is usually added to and removed from the window only a limited number of times.",
+      "The exact space complexity depends on whether additional data structures, such as a hash map or frequency array, are needed to maintain information about the current window."
+    ]
+  },
+  "pseudocode": [],
+  "keyTakeaways": [
+    "Sliding Window processes a continuous range of elements in an array or string.",
+    "A window can be fixed-size or variable-size.",
+    "The window moves by adjusting its boundaries, usually using left and right.",
+    "It avoids repeatedly processing the same elements.",
+    "It is commonly used for subarray and substring problems.",
+    "Sliding Window can often reduce a brute-force O(n²) solution to O(n)."
+  ]
+}

@@ -1,0 +1,47 @@
+{
+  "id": "two-pointers",
+  "title": "Two Pointers",
+  "type": "Technique",
+  "overview": "Two Pointers is a problem-solving technique where we use two variables (pointers) to keep track of positions in an array or string.\n\nInstead of repeatedly checking the same elements, the pointers move through the data according to the problem's conditions.\n\nFor example:\n\nArray:   [1] [2] [3] [4] [5]\n          ↑           ↑\n        left        right\n\nHere, left and right are two pointers that represent positions in the array.",
+  "whyUse": "Many problems require comparing or processing elements from different positions.\n\nA straightforward approach may use nested loops and repeatedly check many pairs of elements.\n\nThe Two Pointers technique can often reduce unnecessary work by moving the pointers intelligently.",
+  "patterns": [
+    {
+      "title": "Pair Searching",
+      "description": "In a sorted array, two pointers can be used to find a pair that satisfies a given condition.\n\nFor example, finding two numbers whose sum equals a target:\n\nArray:   [1] [2] [4] [6] [8]\n          ↑               ↑\n        left            right\n\nIf the current sum is too small, move left.\n\nIf the current sum is too large, move right."
+    },
+    {
+      "title": "Palindrome Checking",
+      "description": "Two pointers can start from opposite ends of a string and compare characters.\n\nString:  L  E  V  E  L\nIndex:   0  1  2  3  4\n         ↑           ↑\n       left        right\n\nIf the characters match, move both pointers toward the center.\n\nIf they don't match, the string is not a palindrome."
+    },
+    {
+      "title": "Removing Duplicates / In-place Processing",
+      "description": "Two pointers can also be used to process an array without using another large array.\n\nOne pointer can track the position where the next valid element should be placed, while the other scans through the array."
+    }
+  ],
+  "howItWorks": [
+    "There are different ways to use two pointers depending on the problem.",
+    "Opposite Direction\n\nOne pointer starts from the beginning and the other from the end.\n\nArray:   [1] [2] [3] [4] [5]\n          ↑               ↑\n        left            right\n\nThe pointers move toward each other based on a condition.\n\nThis is commonly useful when working with sorted arrays, finding pairs, or checking whether a string is a palindrome.\n\nFor example:\n\nString:  L  E  V  E  L\nIndex:   0  1  2  3  4\n         ↑           ↑\n       left        right\n\nInitially:\n\nleft = 0\nright = 4\n\nThe characters at these positions are compared, and the pointers move toward the center.",
+    "Same Direction\n\nBoth pointers start near the beginning and move forward.\n\nArray:   [1] [2] [3] [4] [5]\n          ↑   ↑\n         p1  p2\n\nThe pointers can move at different speeds or represent different positions in a range.\n\nThis pattern is useful for problems involving duplicates, partitions, or maintaining a valid range."
+  ],
+  "example": {
+    "indices": [0, 1, 2, 3, 4],
+    "values": [1, 2, 3, 4, 5]
+  },
+  "operations": [],
+  "complexity": {
+    "time": "O(n)",
+    "space": "O(1)",
+    "notes": [
+      "Two Pointers often allows us to process an array or string in O(n) time because each pointer generally moves through the data only a limited number of times.",
+      "The exact complexity depends on the particular problem and how the pointers are used."
+    ]
+  },
+  "pseudocode": [],
+  "keyTakeaways": [
+    "Two Pointers uses two positions/pointers to process an array or string efficiently.",
+    "The pointers can move toward each other or in the same direction.",
+    "It is commonly used for pair searching, palindrome checking, and in-place array processing.",
+    "It can reduce solutions that use nested loops from O(n²) to O(n) in suitable problems.",
+    "Two Pointers is a problem-solving technique, not a separate data structure."
+  ]
+}

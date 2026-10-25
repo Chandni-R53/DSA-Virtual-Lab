@@ -1,0 +1,48 @@
+{
+  "id": "subarrays-substrings",
+  "title": "Subarrays & Substrings",
+  "type": "Concept",
+  "overview": "What is a Subarray?\nA subarray is a continuous part of an array.\n\nFor example:\n\nArray:       [1] [2] [3] [4] [5]\n\nSubarrays:       [2] [3] [4]\n             [3] [4]\n                 [3] [4] [5]\n\nThe elements in a subarray must be next to each other in the original array.\n\nFor an array:\n\n[1, 2, 3]\n\n[1, 2] is a subarray, but [1, 3] is not a subarray because 2 is skipped.\n\nWhat is a Substring?\nA substring is a continuous part of a string.\n\nFor example:\n\nString:       \"ABCDE\"\n\nSubstring:     \"BCD\"\n\n\"BCD\" is a substring because its characters appear continuously in the original string.\n\nBut \"BDE\" is not a substring because the characters are not continuous.\n\nSubarray vs Substring\nThe main difference is the type of data they come from:\n\nArray  → Subarray\nString → Substring\n\nBoth must contain continuous elements/characters.",
+  "whyUse": "",
+  "importantConcepts": [
+    {
+      "title": "Continuous Elements",
+      "description": "The most important property is continuity.\n\n[1, 2, 3, 4, 5]\n\n[2, 3, 4]  → Subarray ✅\n[2, 4]      → Not a subarray ❌"
+    },
+    {
+      "title": "Subarray / Substring vs Subsequence",
+      "description": "These concepts are often confused.\n\nA subarray or substring must be continuous.\nA subsequence does not need to be continuous, but the original order must be maintained.\n\nArray:       [1, 2, 3, 4, 5]\n\nSubarray:    [2, 3, 4]  → continuous\nSubsequence: [2, 4, 5]  → not continuous\n\nFor strings:\n\nString:      \"ABCDE\"\n\nSubstring:   \"BCD\"  → continuous\nSubsequence: \"ACE\"  → not continuous"
+    },
+    {
+      "title": "Number of Possible Subarrays / Substrings",
+      "description": "For an array or string containing n elements/characters, the total number of non-empty subarrays or substrings is:\n\nn × (n + 1) / 2\n\nFor example, an array of 4 elements has:\n\n4 × 5 / 2 = 10\n\nnon-empty subarrays.\n\nThis becomes useful when solving problems involving all possible subarrays or substrings."
+    }
+  ],
+  "howItWorks": [
+    "A subarray or substring can be identified using its starting and ending positions.",
+    "For an array:\n\nArray: [10, 20, 30, 40, 50]\n        0   1   2   3   4\n\nThe subarray from index 1 to 3 is:\n\n[20, 30, 40]",
+    "Similarly, for a string:\n\nString: \"HELLO\"\nIndex:   0 1 2 3 4\n\nThe substring from index 1 to 3 is:\n\n\"ELL\"",
+    "So, we can think of a subarray or substring as a continuous range between two positions."
+  ],
+  "example": {
+    "indices": [0, 1, 2, 3, 4],
+    "values": [10, 20, 30, 40, 50]
+  },
+  "operations": [],
+  "complexity": {
+    "time": "Generating or checking all possible subarrays/substrings can involve O(n²) possibilities. If we actually process the elements of every subarray/substring, the total work can become O(n³) with a straightforward approach.",
+    "space": "Storing a particular subarray or substring requires space proportional to its length, up to O(n).",
+    "notes": [
+      "There isn't one fixed complexity for every subarray/substring problem. It depends on what we are doing with them."
+    ]
+  },
+  "pseudocode": [],
+  "keyTakeaways": [
+    "A subarray is a continuous part of an array.",
+    "A substring is a continuous part of a string.",
+    "Both are defined by a continuous range of positions.",
+    "A subsequence does not need to be continuous, unlike a subarray or substring.",
+    "An array or string of n elements has n(n+1)/2 non-empty subarrays or substrings.",
+    "Subarray and substring concepts are important foundations for techniques like prefix sum, sliding window, and two pointers."
+  ]
+}

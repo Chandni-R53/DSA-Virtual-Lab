@@ -1,0 +1,66 @@
+{
+  "id": "strings",
+  "title": "Strings",
+  "type": "Data Structure",
+  "overview": "A string is a data structure used to store a sequence of characters such as letters, numbers, spaces, and symbols.\n\nYou can think of a string as a sequence where each character has a position called an index.\n\nString:  H  E  L  L  O\nIndex:   0  1  2  3  4\n\nHere, each character can be accessed using its index:\n\nstr[0] → H\nstr[2] → L\nstr[4] → O\n\nIn many programming languages, strings are internally represented using an array-like sequence of characters, which is why many string operations are similar to array operations.",
+  "whyUse": "Strings are used whenever we need to store and work with text or sequences of characters.\n\nFor example:\n\nName     → \"Chandni\"\nMessage  → \"Hello World\"\nPassword → \"abc123\"\n\nInstead of storing every character separately, a string keeps the complete sequence together and allows us to process it as a single value.",
+  "howItWorks": [
+    "A string stores characters in a specific order, and each character has an index.\n\nString:  C  O  D  E\nIndex:   0  1  2  3",
+    "If we want the character at index 2:\n\nstr[2]\n  ↓\nAccess character at index 2\n  ↓\nD",
+    "This index-based access is similar to accessing an element in an array.",
+    "The exact way strings are stored and modified can differ between programming languages. Some languages treat strings as immutable, meaning their contents cannot be changed directly after creation."
+  ],
+  "example": {
+    "indices": [0, 1, 2, 3],
+    "values": ["C", "O", "D", "E"],
+    "highlightIndex": 2
+  },
+  "operations": [
+    {
+      "name": "Access",
+      "complexity": "O(1)",
+      "description": "Getting a character using its index.\n\nstr[1] → O\n\nTypically O(1)."
+    },
+    {
+      "name": "Traversal",
+      "complexity": "O(n)",
+      "description": "Visiting each character one by one.\n\nFor example, traversal can be used to count characters, check conditions, or process every character.\n\nO(n)."
+    },
+    {
+      "name": "Concatenation",
+      "complexity": "",
+      "description": "Joining two or more strings together.\n\n\"Hello\" + \"World\"\n        ↓\n\"HelloWorld\""
+    },
+    {
+      "name": "Comparison",
+      "complexity": "O(n)",
+      "description": "Comparing two strings to check whether they are equal or determine their ordering.\n\n\"abc\" == \"abc\" → true\n\"abc\" == \"abd\" → false\n\nComparison may require checking characters one by one, so it can take O(n) in the worst case."
+    },
+    {
+      "name": "Searching",
+      "complexity": "O(n) or more depending on the algorithm",
+      "description": "Finding a character or a sequence of characters inside a string.\n\n\"datastructure\"\n     ↑\n    \"str\"\n\nString searching is commonly used to find characters or patterns."
+    },
+    {
+      "name": "Modification",
+      "complexity": "",
+      "description": "Creating a changed version of a string by replacing, inserting, or removing characters.\n\nBefore: \"CAT\"\nChange: \"C\" → \"B\"\nAfter:  \"BAT\"\n\nThe exact cost depends on the programming language and how strings are implemented."
+    }
+  ],
+  "complexity": {
+    "time": "Access character — O(1), Traversal — O(n), Comparison — O(n), Searching — O(n) or more depending on the algorithm",
+    "space": "Storing n characters — O(n) space",
+    "notes": [
+      "Access is typically O(1) because a character can be accessed using its index.",
+      "Operations that examine characters one by one can take O(n)."
+    ]
+  },
+  "pseudocode": [],
+  "keyTakeaways": [
+    "A string stores a sequence of characters in a specific order.",
+    "Characters can usually be accessed directly using their index.",
+    "Common string operations include access, traversal, concatenation, comparison, searching, and modification.",
+    "String behavior and modification can differ between programming languages, especially because some languages use immutable strings.",
+    "Strings are widely used in DSA for text processing and pattern-based problems."
+  ]
+}

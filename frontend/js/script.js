@@ -25,6 +25,7 @@ const steps = [
 ];
 
 const arrayEl = document.querySelector(".array-row");
+const pointerEl = document.querySelector(".pointer-row");
 const msgEl = document.querySelector(".lab-msg-box p");
 const stepPill = document.querySelector(".lab-step-pill");
 const playBtn = document.querySelector(".ctrl-btn-primary");
@@ -46,6 +47,25 @@ function render(index) {
     cell.appendChild(span);
     arrayEl.appendChild(cell);
   });
+
+  // Rebuild pointer row so each pointer aligns under its array index
+  if (pointerEl) {
+    pointerEl.innerHTML = "";
+    const labels = { [step.low]: "low", [step.mid]: "mid", [step.high]: "high" };
+    step.array.forEach((_, i) => {
+      const slot = document.createElement("div");
+      slot.className = "pointer" + (labels[i] === "mid" ? " pointer-active" : "");
+      if (labels[i]) {
+        const arrow = document.createElement("span");
+        arrow.className = "arrow-up";
+        arrow.textContent = "↑";
+        slot.appendChild(arrow);
+        slot.appendChild(document.createTextNode(labels[i]));
+      }
+      pointerEl.appendChild(slot);
+    });
+  }
+
   msgEl.innerHTML = step.msg;
   if (stepPill) stepPill.textContent = `Step ${index + 1} / ${steps.length}`;
 }
