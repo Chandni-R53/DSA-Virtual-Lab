@@ -5,51 +5,127 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Visualizer — DSA Virtual Lab</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="css/style.css">
-<link rel="stylesheet" href="css/virtual-lab.css">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<!-- This page is its own focused "lab": no site header/footer, so it only needs its own stylesheet -->
+<link rel="stylesheet" href="css/visualizer.css">
 </head>
 <body>
-<!-- TEMPORARY PLACEHOLDER: the real visualizer is not built yet.
-     Cards on virtual-lab.html link here as visualizer.html?topic=<category-id>&sub=<subtopic-id>.
-     Later, replace this page's content (or point the links at real pages) using those two values. -->
-<header class="navbar" id="navbar">
-  <div class="navbar-inner">
-    <a href="index.html" class="brand">
-      <span class="brand-mark" aria-hidden="true"><svg width="22" height="22" viewBox="0 0 24 24" fill="none"><path d="M12 3L22 20H2L12 3Z" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/></svg></span>
-      <span>DSA Virtual Lab</span>
-    </a>
-    <nav class="nav-links" id="navLinks">
-      <a href="explore.html">Explore DSA</a>
-      <a href="virtual-lab.html" class="active">Virtual Lab</a>
-      <a href="index.html#how-it-helps">Practice</a>
-    </nav>
-    <div class="navbar-actions" data-authed="false">
-      <a href="#" class="btn btn-outline btn-compact">Log in</a>
-      <a href="#" class="btn btn-primary btn-compact">Get Started</a>
-    </div>
-    <button class="nav-toggle" id="navToggle" aria-label="Toggle menu" aria-expanded="false"><span></span><span></span><span></span></button>
-  </div>
+
+<!-- Slim top bar: just a way back -->
+<header class="vz-topbar">
+  <a class="vz-back" href="virtual-lab.html">
+    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
+    Back
+  </a>
 </header>
 
-<main class="vl-page">
-  <div class="section-inner vl-placeholder">
-    <span class="pill">Coming soon</span>
-    <h1 class="vl-title" id="phTitle">Visualizer</h1>
-    <p class="vl-sub">This visualization hasn't been built yet. The card you clicked is wired up and ready to connect.</p>
-    <p class="vl-ph-meta">topic: <code id="phTopic">–</code> &nbsp;·&nbsp; sub: <code id="phSub">–</code></p>
-    <a class="btn btn-primary" href="virtual-lab.html">← Back to Virtual Lab</a>
+<main id="main">
+
+  <!-- ===== THE LAB (shown when the algorithm exists) ===== -->
+  <div id="vzLab" hidden>
+
+    <section class="vz-heading">
+      <span class="vz-badge" id="vzCategory"></span>
+      <h1 id="vzTitle"></h1>
+      <p id="vzDesc"></p>
+    </section>
+
+    <div class="vz-layout">
+
+      <!-- LEFT: understand the algorithm -->
+      <aside class="vz-panel vz-left" aria-label="About this algorithm">
+        <section>
+          <h2 class="vz-eyebrow">Pseudocode</h2>
+          <ol class="vz-code" id="vzCode"></ol>
+        </section>
+        <section class="vz-divided" id="vzTime"></section>
+        <section class="vz-divided" id="vzSpace"></section>
+      </aside>
+
+      <!-- RIGHT: interact -->
+      <section class="vz-panel vz-right">
+
+        <form class="vz-form" id="vzForm" novalidate>
+          <div class="vz-fields" id="vzFields"></div>
+          <div class="vz-form-actions">
+            <button type="submit" class="vz-run">Run</button>
+            <button type="button" class="vz-ghost" id="vzRandom">Random</button>
+          </div>
+        </form>
+
+        <div class="vz-stage">
+          <div class="vz-stage-top">
+            <div class="vz-focus" id="vzFocus"></div>
+            <ul class="vz-legend" id="vzLegend"></ul>
+          </div>
+          <div class="vz-canvas" id="vzCanvas" aria-label="Visualization"></div>
+          <div class="vz-vars" id="vzVars"></div>
+        </div>
+
+        <div class="vz-msg" id="vzMsg" aria-live="polite">
+          <div class="vz-msg-text" id="vzMsgText"></div>
+          <div class="vz-result" id="vzResult" style="visibility:hidden">
+            <svg id="vzResultIcon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6L9 17l-5-5"/></svg>
+            <span id="vzResultText"></span>
+          </div>
+        </div>
+
+        <div class="vz-controls">
+          <div class="vz-buttons">
+            <button type="button" class="vz-btn" id="vzPrev" aria-label="Previous step">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M6 5h2v14H6zM20 5v14L9 12z"/></svg>Prev
+            </button>
+            <button type="button" class="vz-btn vz-play" id="vzPlay" aria-label="Play">
+              <svg id="vzPlayIcon" width="18" height="18" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M7 4v16l13-8z"/></svg>
+              <span id="vzPlayText">Play</span>
+            </button>
+            <button type="button" class="vz-btn" id="vzNext" aria-label="Next step">
+              Next<svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M16 5h2v14h-2zM4 5l11 7L4 19z"/></svg>
+            </button>
+            <button type="button" class="vz-btn" id="vzReset" aria-label="Reset to the first step">
+              <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 12a9 9 0 1 0 3-6.7L3 8M3 3v5h5"/></svg>Reset
+            </button>
+          </div>
+
+          <div class="vz-sliders">
+            <div class="vz-slider vz-slider-speed">
+              <span id="vzSpeedLabel">Speed</span>
+              <div class="vz-speeds" id="vzSpeeds" role="group" aria-labelledby="vzSpeedLabel"></div>
+            </div>
+            <label class="vz-slider vz-slider-step">
+              <span id="vzStepLabel">Step 1 / 1</span>
+              <input type="range" id="vzProgress" min="0" max="0" step="1" value="0">
+              <span class="vz-hint">Drag to jump to any step</span>
+            </label>
+          </div>
+
+          <p class="vz-keys">Shortcuts: <kbd>Space</kbd> play / pause · <kbd>←</kbd> <kbd>→</kbd> previous / next</p>
+        </div>
+      </section>
+    </div>
   </div>
+
+  <!-- ===== NOT BUILT YET (the server answered "not found") ===== -->
+  <div class="vz-state" id="vzSoon" hidden>
+    <span class="vz-badge">Coming soon</span>
+    <h1 id="vzSoonTitle">Visualizer</h1>
+    <p>This visualization isn't built yet. The card is wired up and ready for it.</p>
+    <a class="vz-run vz-link" href="virtual-lab.html">← Back to Virtual Lab</a>
+  </div>
+
+  <!-- ===== PYTHON SERVER NOT REACHABLE ===== -->
+  <div class="vz-state" id="vzOffline" hidden>
+    <span class="vz-badge">Server not reachable</span>
+    <h1>Can't reach the Python server</h1>
+    <p id="vzOfflineMsg"></p>
+    <button type="button" class="vz-run" onclick="location.reload()">Try again</button>
+  </div>
+
 </main>
 
-<script src="js/script.js"></script>
-<script>
-  // Read ?topic=...&sub=... and show them (placeholder only)
-  var p = new URLSearchParams(location.search);
-  var sub = p.get('sub') || '';
-  document.getElementById('phTopic').textContent = p.get('topic') || '–';
-  document.getElementById('phSub').textContent = sub || '–';
-  if (sub) document.getElementById('phTitle').textContent = sub.replace(/-/g, ' ').replace(/\b\w/g, function (c) { return c.toUpperCase(); });
-</script>
+<!-- shared engine (never changes per algorithm) + the drawing styles. The algorithms live in Python. -->
+<script src="js/visualizer/player.js"></script>
+<script src="js/visualizer/main.js"></script>
 </body>
 </html>
