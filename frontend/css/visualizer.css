@@ -207,6 +207,93 @@ kbd { font: 500 .69rem var(--font-mono); padding: 2px 7px; border: 1px solid var
 .vz-state h1 { font-family: var(--font-head); font-size: 2rem; font-weight: 700; letter-spacing: -0.02em; }
 .vz-state p { max-width: 520px; color: var(--ink-soft); line-height: 1.6; }
 
+/* ---------- Bars renderer (Bubble Sort, Selection Sort …) ----------
+   The stage already provides flex: 1 so .vz-bars fills all available height. */
+.vz-bars {
+  display: flex;
+  align-items: flex-end;          /* bars grow upward from the bottom */
+  align-self: stretch;            /* fill the full canvas height */
+  gap: 10px;
+  width: 100%;
+  min-height: 200px;
+  overflow-x: auto;
+  padding: 24px 28px 12px;
+  scrollbar-width: thin;
+  scrollbar-color: #3E3F4A transparent;
+}
+.vz-bars::before,
+.vz-bars::after { content: ""; margin: auto; } /* centre when short; scroll when long */
+
+.vz-bar-col {
+  flex: 0 0 auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 6px;
+  /* CSS transition so colour changes are smooth (speed is set by --vz-ms) */
+  transition: transform var(--vz-ms, 300ms) ease;
+}
+
+.vz-bar-label {
+  font: 600 .72rem var(--font-mono);
+  color: var(--ink-soft);
+  white-space: nowrap;
+  transition: color var(--vz-ms, 300ms) ease;
+  min-height: 1em;
+}
+
+.vz-bar-body {
+  width: 100%;
+  border-radius: 6px 6px 0 0;
+  background: #3E3F4A;
+  border: 1.5px solid #5A5B68;
+  /* height is set inline by the renderer */
+  transition:
+    height      var(--vz-ms, 300ms) ease,
+    background  var(--vz-ms, 300ms) ease,
+    border-color var(--vz-ms, 300ms) ease,
+    box-shadow  var(--vz-ms, 300ms) ease;
+}
+
+.vz-bar-idx {
+  font: 500 .72rem var(--font-mono);
+  color: #6A6A72;
+}
+
+/* Comparing – lime outline + slight lift */
+.vz-bar-col.is-comparing .vz-bar-body {
+  background: #2F3A1A;
+  border-color: var(--lime);
+  box-shadow: 0 0 0 3px rgba(196, 240, 66, .20), 0 -6px 18px rgba(196, 240, 66, .12);
+}
+.vz-bar-col.is-comparing { transform: translateY(-8px); }
+.vz-bar-col.is-comparing .vz-bar-label { color: var(--lime); }
+
+/* Swapping – amber / orange to distinguish from compare */
+.vz-bar-col.is-swapping .vz-bar-body {
+  background: #3A2A0A;
+  border-color: #F0A842;
+  box-shadow: 0 0 0 3px rgba(240, 168, 66, .22), 0 -6px 18px rgba(240, 168, 66, .14);
+}
+.vz-bar-col.is-swapping { transform: translateY(-12px); }
+.vz-bar-col.is-swapping .vz-bar-label { color: #F0A842; }
+
+/* Sorted – solid lime fill */
+.vz-bar-col.is-sorted .vz-bar-body {
+  background: var(--lime);
+  border-color: var(--lime);
+  box-shadow: 0 0 0 2px rgba(196, 240, 66, .15);
+}
+.vz-bar-col.is-sorted .vz-bar-label { color: var(--lime); }
+.vz-bar-col.is-sorted .vz-bar-idx   { color: var(--lime); }
+
+/* Reduced-motion override */
+@media (prefers-reduced-motion: reduce) {
+  .vz-bar-body, .vz-bar-col { transition: none; }
+  .vz-bar-col.is-comparing, .vz-bar-col.is-swapping { transform: none; }
+}
+
 /* ---------- Responsive ---------- */
 @media (max-width: 1000px) {
   .vz-layout { grid-template-columns: minmax(0, 1fr); padding: 20px 16px 32px; }
