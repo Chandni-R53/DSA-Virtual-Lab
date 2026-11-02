@@ -14,7 +14,9 @@
      { id, title, category, renderer, description,
        focus:      {label, input},                  the "Looking for 9" chip
        legend:     [{cls, label}],
-       inputs:     [{id, label, type: 'list' | 'number', placeholder, hint, max_length?}],
+       inputs:     [{id, label, type: 'list' | 'number' | 'text' | 'choice', placeholder, hint, max_length?,
+                   options?: [{v, label}]        (choice),
+                   optional?, needed_for?: {fieldId: [values]}   (number: greyed out unless that choice has one of the values)}],
        defaults:   {...values for every input},
        pseudocode: [{t, indent}],
        complexity: {time: {...}, space: {...}} }
@@ -144,16 +146,61 @@ const DEFAULT_SPEED = 1;   // "Slow"
 
     /* ---------- Input form (built from algo.inputs) ---------- */
     const PENCIL = '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 20h9M16.5 3.5a2.1 2.1 0 0 1 3 3L7 19l-4 1 1-4z"/></svg>';
-    $('vzFields').innerHTML = algo.inputs.map((f) => `
-      <label class="vz-field vz-field-${f.type}">
+    // a "choice" is a row of buttons (used by Arrays to pick Access / Insert / Delete ...)
+    const css = document.createElement('style');
+    css.textContent = `
+      .vz-field-choice { flex: 1 1 100%; }
+      .vz-field-text { flex: 1 1 280px; }
+      .vz-field-text.vz-compact { flex: 0 0 190px; }
+      .vz-choice { display: flex; flex-wrap: wrap; gap: 8px; }
+      .vz-choice button { padding: 9px 16px; border-radius: 999px; border: 1px solid #3E3F4A; background: #26272E; color: #D6D6DA; font: 600 .84rem var(--font-body); cursor: pointer; transition: all .15s ease; }
+      .vz-choice button:hover { border-color: rgba(196, 240, 66, .75); }
+      .vz-choice button[aria-checked="true"] { background: var(--lime); border-color: var(--lime); color: #18181D; }
+      .vz-field.is-off { opacity: .38; }
+      .vz-field.is-off input { cursor: not-allowed; }`;
+    document.head.appendChild(css);
+
+    $('vzFields').innerHTML = algo.inputs.map((f) => f.type === 'choice' ? `
+      <div class="vz-field vz-field-choice" data-f="${f.id}">
+        <span>${esc(f.label)}</span>
+        <div class="vz-choice" id="in_${f.id}" role="radiogroup" data-value="">
+          ${f.options.map((o) => `<button type="button" role="radio" aria-checked="false" data-v="${esc(o.v)}">${esc(o.label)}</button>`).join('')}
+        </div>
+      </div>` : `
+      <label class="vz-field vz-field-${f.type}${f.compact ? ' vz-compact' : ''}" data-f="${f.id}">
         <span>${esc(f.label)}</span>
         <span class="vz-inwrap">${PENCIL}<input type="text" id="in_${f.id}" inputmode="${f.type === 'number' ? 'numeric' : 'text'}" placeholder="${esc(f.placeholder || '')}" spellcheck="false" autocomplete="off"></span>
         ${f.hint ? `<small>${esc(f.hint)}</small>` : ''}
       </label>`).join('');
 
+    function choiceValue(f) { return $('in_' + f.id).dataset.value; }
+    function setChoice(f, v) {
+      const box = $('in_' + f.id);
+      box.dataset.value = v;
+      box.querySelectorAll('button').forEach((b) => b.setAttribute('aria-checked', b.dataset.v === v ? 'true' : 'false'));
+      refreshNeeded();
+    }
+    // A field with needed_for (like "Value") is greyed out when the chosen operation does not use it.
+    function isOff(f) {
+      if (!f.needed_for) return false;
+      return Object.keys(f.needed_for).some((id) => f.needed_for[id].indexOf(choiceValue(algo.inputs.find((x) => x.id === id))) < 0);
+    }
+    function refreshNeeded() {
+      algo.inputs.forEach((f) => {
+        if (f.needed_for) document.querySelector(`.vz-field[data-f="${f.id}"]`).classList.toggle('is-off', isOff(f));
+      });
+    }
+    $('vzFields').addEventListener('click', (e) => {
+      const b = e.target.closest('.vz-choice button');
+      if (!b) return;
+      setChoice(algo.inputs.find((f) => 'in_' + f.id === b.parentNode.id), b.dataset.v);
+    });
+
     function fillForm(values) {
       algo.inputs.forEach((f) => {
-        $('in_' + f.id).value = f.type === 'list' ? values[f.id].join(', ') : values[f.id];
+        if (f.type === 'choice') return setChoice(f, values[f.id]);
+        const v = values[f.id];
+        $('in_' + f.id).value = f.type === 'list' ? v.join(', ') : (v === null || v === undefined ? '' : v);
       });
     }
 
@@ -163,7 +210,25 @@ const DEFAULT_SPEED = 1;   // "Slow"
     function readForm() {
       const values = {};
       for (const f of algo.inputs) {
+        if (f.type === 'choice') {
+          if (!choiceValue(f)) return { error: `Please choose an option for ${f.label.toLowerCase()}.` };
+          values[f.id] = choiceValue(f);
+          continue;
+        }
+        if (isOff(f)) { values[f.id] = null; continue; }      // not used by this operation: ignore whatever is typed
+        if (f.type === 'text') {
+          const full = $('in_' + f.id).value;
+          const val = f.trim === false ? full : full.trim();     // trim:false keeps spaces (so a space can be searched for)
+          const noun = f.noun || f.label.toLowerCase();
+          const max = f.max_length || 30;
+          if (val === '') return { error: `Please enter the ${noun}.` };
+          if (val.length > max) return { error: `Please use at most ${max} characters in the ${noun}. You typed ${val.length}.` };
+          if (!/^[\x20-\x7E]+$/.test(val)) return { error: 'Please use only letters, numbers, spaces and common symbols (no emoji or accented letters).' };
+          values[f.id] = val;
+          continue;
+        }
         const raw = $('in_' + f.id).value.trim();
+        if (f.optional && raw === '') return { error: `Please enter the ${f.label.toLowerCase()} for this operation.` };
         if (f.type === 'list') {
           const max = f.max_length || 30;
           const parts = raw.split(/[,\s]+/).filter(Boolean);
