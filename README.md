@@ -15,7 +15,7 @@ An interactive learning platform where Data Structures & Algorithms run **step b
 
 <hr>
 
-<h2>Why This Project?</h2>
+<h3>Why This Project?</h3>
 
 Most students learn algorithms by reading code or looking at static diagrams. This explains *what* an algorithm does, but not always *how* it works internally. The difficult part is understanding how data changes from one step to the next.
 
@@ -23,7 +23,7 @@ DSA Virtual Lab makes this process visible. Each algorithm executes step by step
 
 <hr>
 
-<h2>Features</h2>
+<h3>Features</h3>
 
 - **Step-by-step playback:** Play, Pause, Previous, Next, and Reset.
 - **Speed control:** Five playback speeds, from Very Slow to Turbo.
@@ -39,7 +39,7 @@ DSA Virtual Lab makes this process visible. Each algorithm executes step by step
 
 <hr>
 
-<h2>Project Preview</h2>
+<h3>Project Preview</h3>
 
 <table>
   <tr>
@@ -70,7 +70,7 @@ DSA Virtual Lab makes this process visible. Each algorithm executes step by step
 
 <hr>
 
-<h2>How It Works</h2>
+<h3>How It Works</h3>
 
 Each Python algorithm records snapshots of its execution after important operations. FastAPI sends these snapshots to the browser in JSON format, and JavaScript uses them to display and replay the algorithm step by step.
 
@@ -105,7 +105,7 @@ This separation makes the system modular. New algorithms can be integrated by ad
 
 <hr>
 
-<h2>Tech Stack</h2>
+<h3>Tech Stack</h3>
 
 <p>
   <img src="https://skillicons.dev/icons?i=python,fastapi,js,html,css,git,github,vscode&theme=dark" alt="Technology Stack">
@@ -121,7 +121,7 @@ This separation makes the system modular. New algorithms can be integrated by ad
 
 <hr>
 
-<h2>Project Structure</h2>
+<h3>Project Structure</h3>
 
 ```text
 DSA-Virtual-Lab/
@@ -166,7 +166,7 @@ DSA-Virtual-Lab/
 
 <hr>
 
-<h2>Getting Started</h2>
+<h3>Getting Started</h3>
 
 **Requirements**
 
@@ -209,7 +209,7 @@ Open `frontend/index.html` in VS Code, right-click, and select **Open with Live 
 
 <hr>
 
-<h2>What I Learned</h2>
+<h3>What I Learned</h3>
 
 - Designing a modular system that separates data, logic, and presentation.
 - Converting algorithm execution into state snapshots that can be replayed forwards and backwards.
@@ -220,7 +220,7 @@ Open `frontend/index.html` in VS Code, right-click, and select **Open with Live 
 
 <hr>
 
-<h2>About the Author</h2>
+<h3>About the Author</h3>
 
 **Chandni Rajawat**  
 B.Tech – Information Technology (IoT)  
