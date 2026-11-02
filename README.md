@@ -1,8 +1,6 @@
-# <img src="docs/logo.svg" width="22" alt="DSA Virtual Lab logo"> DSA Virtual Lab
+# <img src="docs/logo.svg" width="22" alt="DSA Virtual Lab Logo"> DSA Virtual Lab
 
-<div align="center">
-
-### Don't just read algorithms. Watch them think.
+**Don't just read algorithms. Watch them think.**
 
 An interactive learning platform where Data Structures & Algorithms run **step by step, right in your browser**. Pick an algorithm, enter your own input, and watch every comparison, swap, and decision as it happens.
 
@@ -15,19 +13,17 @@ An interactive learning platform where Data Structures & Algorithms run **step b
   <img src="https://img.shields.io/badge/Git-F05032?style=flat-square&logo=git&logoColor=white" alt="Git">
 </p>
 
-</div>
+<hr>
 
----
+<h2>Why This Project?</h2>
 
-## Why This Project?
-
-Most students learn algorithms by reading code or looking at static diagrams. This explains what an algorithm does, but not always how it works internally. The difficult part is understanding how data changes from one step to the next.
+Most students learn algorithms by reading code or looking at static diagrams. This explains *what* an algorithm does, but not always *how* it works internally. The difficult part is understanding how data changes from one step to the next.
 
 DSA Virtual Lab makes this process visible. Each algorithm executes step by step, with a plain-English explanation, the current pseudocode line, live variables, and a complexity breakdown.
 
----
+<hr>
 
-## Features
+<h2>Features</h2>
 
 - **Step-by-step playback:** Play, Pause, Previous, Next, and Reset.
 - **Speed control:** Five playback speeds, from Very Slow to Turbo.
@@ -41,33 +37,40 @@ DSA Virtual Lab makes this process visible. Each algorithm executes step by step
 - **Algorithm-specific visualizations:** Uses bubbles, tiles, cards, and merge trees depending on the algorithm.
 - **Explore DSA:** Provides concept pages across 12 categories using JSON-based content.
 
----
+<hr>
 
-## Project Preview
+<h2>Project Preview</h2>
 
-<div align="center">
+<table>
+  <tr>
+    <td>
+      <strong>Home Page</strong><br><br>
+      <img src="docs/home.png" alt="DSA Virtual Lab Home Page" width="100%">
+    </td>
+  </tr>
+  <tr>
+    <td>
+      <strong>Explore DSA</strong><br><br>
+      <img src="docs/explore.png" alt="Explore DSA Page" width="100%">
+    </td>
+  </tr>
+  <tr>
+    <td>
+      <strong>Virtual Lab</strong><br><br>
+      <img src="docs/virtual-lab.png" alt="Virtual Lab Topics" width="100%">
+    </td>
+  </tr>
+  <tr>
+    <td>
+      <strong>Merge Sort Visualizer</strong><br><br>
+      <img src="docs/mergeSort.png" alt="Merge Sort Visualizer" width="100%">
+    </td>
+  </tr>
+</table>
 
-**Home Page**
+<hr>
 
-<img src="docs/home.png" alt="DSA Virtual Lab Home Page" width="90%">
-
-**Explore DSA**
-
-<img src="docs/explore.png" alt="Explore DSA Page" width="90%">
-
-**Virtual Lab**
-
-<img src="docs/virtual-lab.png" alt="Virtual Lab Topics" width="90%">
-
-**Merge Sort Visualizer**
-
-<img src="docs/mergeSort.png" alt="Merge Sort Visualizer" width="90%">
-
-</div>
-
----
-
-## How It Works
+<h2>How It Works</h2>
 
 Each Python algorithm records snapshots of its execution after important operations. FastAPI sends these snapshots to the browser in JSON format, and JavaScript uses them to display and replay the algorithm step by step.
 
@@ -78,7 +81,7 @@ flowchart TD
     C["Algorithm Registry<br/>dsa_engine/registry.py"]
     D["Python Algorithm Engine<br/>Sorting · Searching · Arrays & Strings"]
     E["Execution States<br/>JSON Response"]
-    F["Frontend Player & Renderers<br/>Step-by-step Visualization"]
+    F["Player & Renderers<br/>JavaScript Visualization"]
 
     A -->|"Algorithm request and input"| B
     B --> C
@@ -89,7 +92,7 @@ flowchart TD
     A --> F
 ```
 
-### Core Components
+**Core Components**
 
 | Component | Responsibility |
 |---|---|
@@ -100,13 +103,13 @@ flowchart TD
 
 This separation makes the system modular. New algorithms can be integrated by adding an engine implementation, registering it, and creating or reusing a suitable renderer.
 
----
+<hr>
 
-## Tech Stack
+<h2>Tech Stack</h2>
 
-<div align="center">
+<p>
   <img src="https://skillicons.dev/icons?i=python,fastapi,js,html,css,git,github,vscode&theme=dark" alt="Technology Stack">
-</div>
+</p>
 
 | Layer | Technology |
 |---|---|
@@ -116,9 +119,9 @@ This separation makes the system modular. New algorithms can be integrated by ad
 | Content | JSON files |
 | Development Tools | Git, GitHub, VS Code |
 
----
+<hr>
 
-## Project Structure
+<h2>Project Structure</h2>
 
 ```text
 DSA-Virtual-Lab/
@@ -161,18 +164,16 @@ DSA-Virtual-Lab/
 └── README.md
 ```
 
----
+<hr>
 
-## Getting Started
+<h2>Getting Started</h2>
 
-### Requirements
+**Requirements**
 
 - Python 3.10 or newer
 - Git
 - Visual Studio Code
 - Live Server extension for VS Code
-
-### Installation and Setup
 
 **1. Clone the repository**
 
@@ -206,9 +207,9 @@ Open `frontend/index.html` in VS Code, right-click, and select **Open with Live 
 
 > Keep both services running: Uvicorn serves the backend API, while Live Server serves the frontend pages.
 
----
+<hr>
 
-## What I Learned
+<h2>What I Learned</h2>
 
 - Designing a modular system that separates data, logic, and presentation.
 - Converting algorithm execution into state snapshots that can be replayed forwards and backwards.
@@ -217,19 +218,19 @@ Open `frontend/index.html` in VS Code, right-click, and select **Open with Live 
 - Working with DOM updates, Fetch API, timers, and JavaScript state.
 - Designing algorithm-specific visualizations and improving their readability.
 
----
+<hr>
 
-## About the Author
+<h2>About the Author</h2>
 
 **Chandni Rajawat**  
 B.Tech – Information Technology (IoT)  
 Madhav Institute of Technology & Science, Gwalior
 
-<div align="left">
+<p>
   <a href="https://www.linkedin.com/in/chandni-rajawat/">
     <img src="https://img.shields.io/badge/LinkedIn-0A66C2?style=flat-square&logo=linkedin&logoColor=white" alt="LinkedIn">
   </a>
   <a href="mailto:rajawatchandni53@gmail.com">
     <img src="https://img.shields.io/badge/Email-D14836?style=flat-square&logo=gmail&logoColor=white" alt="Email">
   </a>
-</div>
+</p>
